@@ -1,0 +1,18 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "vin-cloud-solutions",
+    "compatibility_date": "2025-12-02",
+    "assets": {
+        "directory": "dist",
+        "not_found_handling": "single-page-application"
+    },
+    "build": {
+        "command": "npm run build",
+        "cwd": "."
+    },
+    "env": {
+        "production": {
+            "name": "vin-cloud-solutions"
+        }
+    }
+}
