@@ -1,0 +1,13 @@
+{
+  "name": "VIN Cloud Solutions",
+  "short_name": "VIN Cloud",
+  "description": "AI, software development and cloud consulting.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070D16",
+  "theme_color": "#070D16",
+  "icons": [
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

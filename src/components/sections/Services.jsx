@@ -1,94 +1,108 @@
 import React from 'react';
-import { Layers, Cloud, Package } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Check } from 'lucide-react';
 import { SERVICES } from '../../utils/constants';
 import Container from '../common/Container';
 import Section from '../common/Section';
+import SectionHeading from '../common/SectionHeading';
+import SpotlightCard from '../common/SpotlightCard';
+import Reveal from '../common/Reveal';
+import Badge from '../common/Badge';
+import Icon from '../common/Icon';
 
-const iconComponents = {
-    Layers,
-    Cloud,
-    Package,
+// Bento layout: featured AI card is wide, licensing closes the grid as a full-width banner.
+const SPANS = {
+    ai: 'md:col-span-2',
+    licensing: 'md:col-span-2 lg:col-span-3',
 };
+
+// Small illustrative copilot exchange that fills the featured AI card.
+const AIPreview = () => (
+    <div aria-hidden="true" className="rounded-2xl border border-white/10 bg-ink-950/60 p-4 font-mono text-[12px] leading-relaxed">
+        <div className="flex items-center gap-2 text-slate-500">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-soft" /> vin-copilot
+        </div>
+        <p className="mt-3 text-slate-300">
+            <span className="text-brand-300">you ›</span> Summarize open P1 incidents and draft an update for leadership.
+        </p>
+        <p className="mt-2 text-slate-400">
+            <span className="text-violet-300">ai ›</span> 3 P1s open (Jira · ServiceNow). Root cause identified for 2; ETA 4h.
+            Draft posted to <span className="text-slate-200">#exec-updates</span> in Teams — sources cited.
+            <span className="ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 bg-glow animate-pulse-soft" />
+        </p>
+    </div>
+);
 
 const ServiceCard = ({ service, index }) => {
-    const IconComponent = iconComponents[service.icon];
+    const wide = service.id === 'licensing';
+    const featured = service.featured;
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-        >
-            <div className="w-14 h-14 bg-gradient-to-br from-primary-700 to-primary-500 rounded-lg flex items-center justify-center mb-6">
-                <IconComponent size={28} className="text-white" />
-            </div>
+        <Reveal delay={index * 0.05} className={`${SPANS[service.id] || ''}`}>
+            <SpotlightCard
+                as="article"
+                id={`service-${service.id}`}
+                className={`h-full scroll-mt-28 ${featured ? 'bg-gradient-to-br from-brand-500/15 via-white/[0.03] to-ai/10' : ''}`}
+                glow={featured ? 'rgba(167,139,250,0.16)' : undefined}
+            >
+                <div className={`flex h-full flex-col gap-6 p-7 md:p-8 ${wide ? 'lg:flex-row lg:items-center lg:gap-12' : ''}`}>
+                    <div className={wide ? 'lg:w-1/2' : ''}>
+                        <div className="mb-6 flex items-center justify-between">
+                            <span className={`grid h-12 w-12 place-items-center rounded-xl border ${featured ? 'border-ai/40 bg-ai/15 text-violet-200' : 'border-brand-300/25 bg-brand-500/10 text-brand-200'}`}>
+                                <Icon name={service.icon} size={22} />
+                            </span>
+                            {featured && <Badge variant="ai">New · Flagship</Badge>}
+                        </div>
+                        <h3 className={`font-semibold ${featured ? 'text-2xl md:text-3xl' : 'text-xl'}`}>{service.title}</h3>
+                        <p className="mt-3 text-sm leading-relaxed text-slate-400 md:text-base">{service.description}</p>
+                    </div>
 
-            <h3 className="text-2xl font-bold text-primary-900 mb-4">
-                {service.title}
-            </h3>
+                    <div className={`flex flex-1 flex-col justify-between gap-6 ${wide ? 'lg:w-1/2' : ''}`}>
+                        <ul className={`grid gap-2.5 text-sm ${featured || wide ? 'sm:grid-cols-2' : ''}`}>
+                            {service.features.map((feature) => (
+                                <li key={feature} className="flex items-start gap-2 text-slate-300">
+                                    <Check size={16} className="mt-0.5 shrink-0 text-glow" aria-hidden="true" />
+                                    {feature}
+                                </li>
+                            ))}
+                        </ul>
+                        {featured && <AIPreview />}
+                        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/5 pt-5">
+                            <div className="flex flex-wrap gap-1.5">
+                                {service.tags.map((t) => <Badge key={t}>{t}</Badge>)}
+                            </div>
+                            <Link
+                                to={service.id === 'ai' ? '/#ai' : `/?service=${service.id}#contact`}
+                                className="inline-flex items-center gap-1 text-sm font-semibold text-brand-200 hover:text-glow"
+                                aria-label={`Learn more about ${service.title}`}
+                            >
+                                {service.id === 'ai' ? 'Explore AI' : 'Discuss'} <ArrowUpRight size={16} />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </SpotlightCard>
+        </Reveal>
+    );
+};
 
-            <p className="text-slate-600 mb-6">
-                {service.description}
-            </p>
-
-            <ul className="space-y-3">
-                {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start space-x-2">
-                        <svg
-                            className="w-5 h-5 text-accent mt-0.5 flex-shrink-0"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                        <span className="text-slate-700">{feature}</span>
-                    </li>
+const Services = () => (
+    <Section id="services" labelledBy="services-title">
+        <Container>
+            <SectionHeading
+                id="services-title"
+                eyebrow="What we do"
+                title="End-to-end technology services,"
+                highlight="one accountable partner."
+                description="Strategic thinking combined with hands-on engineering — from AI and custom software to cloud infrastructure, integrations and licensing."
+            />
+            <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {SERVICES.map((service, index) => (
+                    <ServiceCard key={service.id} service={service} index={index} />
                 ))}
-            </ul>
-        </motion.div>
-    );
-};
-
-const Services = () => {
-    return (
-        <Section id="services" bgColor="bg-slate-50">
-            <Container>
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-primary-900 mb-4"
-                    >
-                        Our Services
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        viewport={{ once: true }}
-                        className="text-xl text-slate-600 max-w-3xl mx-auto"
-                    >
-                        Transform your cloud infrastructure with expert guidance
-                    </motion.p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {SERVICES.map((service, index) => (
-                        <ServiceCard key={service.id} service={service} index={index} />
-                    ))}
-                </div>
-            </Container>
-        </Section>
-    );
-};
+            </div>
+        </Container>
+    </Section>
+);
 
 export default Services;

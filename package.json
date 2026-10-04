@@ -17,6 +17,8 @@
     "wrangler": "^4.51.0"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
     "@vitejs/plugin-react": "^4.7.0",
     "buffer": "^6.0.3",
     "framer-motion": "^12.23.25",
@@ -24,9 +26,9 @@
     "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-helmet-async": "^2.0.5",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.9.6",
+    "three": "^0.186.1",
     "vite-plugin-node-polyfills": "^0.24.0"
   }
 }

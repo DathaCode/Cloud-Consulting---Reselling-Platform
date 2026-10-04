@@ -1,82 +1,144 @@
-import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useScrollPosition } from '../../hooks/useScrollPosition';
-import { COMPANY_INFO, NAV_LINKS } from '../../utils/constants';
+import { NAV_LINKS, SERVICES } from '../../utils/constants';
 import Button from './Button';
 import Container from './Container';
+import Logo from './Logo';
+import Icon from './Icon';
+
+const ServicesMenu = () => {
+    const [open, setOpen] = useState(false);
+
+    return (
+        <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+            <a
+                href="/#services"
+                aria-haspopup="true"
+                aria-expanded={open}
+                onFocus={() => setOpen(true)}
+                className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+            >
+                Services
+                <ChevronDown size={14} className={`transition-transform ${open ? 'rotate-180' : ''}`} />
+            </a>
+
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.18 }}
+                        className="absolute left-1/2 top-full w-[640px] -translate-x-1/2 pt-3"
+                        onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setOpen(false)}
+                    >
+                        <div className="grid grid-cols-2 gap-1 rounded-2xl border border-white/10 bg-ink-850/95 p-2 shadow-2xl backdrop-blur-xl">
+                            {SERVICES.map((s) => (
+                                <a
+                                    key={s.id}
+                                    href={`/#service-${s.id}`}
+                                    onClick={() => setOpen(false)}
+                                    className="group flex gap-3 rounded-xl p-3 transition-colors hover:bg-white/5"
+                                >
+                                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-brand-300/20 bg-brand-500/10 text-brand-200 group-hover:text-glow">
+                                        <Icon name={s.icon} size={18} />
+                                    </span>
+                                    <span>
+                                        <span className="block text-sm font-semibold text-slate-100">{s.short}</span>
+                                        <span className="line-clamp-2 text-xs text-slate-400">{s.description}</span>
+                                    </span>
+                                </a>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const scrollPosition = useScrollPosition();
-    const isScrolled = scrollPosition > 50;
+    const isScrolled = useScrollPosition() > 20;
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+    useEffect(() => {
+        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [isMenuOpen]);
 
     return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-lg' : 'bg-white bg-opacity-95'
-                }`}
+        <header
+            className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+                isScrolled || isMenuOpen ? 'border-b border-white/10 bg-ink-900/80 backdrop-blur-xl' : 'border-b border-transparent'
+            }`}
         >
             <Container>
-                <div className="flex items-center justify-between h-16 md:h-20">
-                    {/* Logo */}
-                    <a href="/" className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-primary-700 to-primary-500 rounded-lg flex items-center justify-center">
-                            <span className="text-white font-bold text-xl">V</span>
-                        </div>
-                        <span className="text-primary-900 font-bold text-lg md:text-xl hidden sm:inline">
-                            {COMPANY_INFO.name}
-                        </span>
+                <nav aria-label="Main" className="flex h-16 items-center justify-between md:h-20">
+                    <a href="/" aria-label="VIN Cloud Solutions — home">
+                        <Logo />
                     </a>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
-                        {NAV_LINKS.map((link) => (
+                    <div className="hidden items-center gap-1 lg:flex">
+                        <ServicesMenu />
+                        {NAV_LINKS.filter((l) => l.name !== 'Services').map((link) => (
                             <a
                                 key={link.name}
                                 href={link.href}
-                                className="text-slate-800 hover:text-primary-700 font-medium transition-colors"
+                                className="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
                             >
                                 {link.name}
                             </a>
                         ))}
-                        <Button href="#contact" variant="primary">
-                            Request Consultation
+                    </div>
+
+                    <div className="hidden lg:block">
+                        <Button href="/#contact" size="sm">
+                            Book a consultation
+                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
                         </Button>
                     </div>
 
-                    {/* Mobile Menu Button */}
                     <button
-                        onClick={toggleMenu}
-                        className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
-                        aria-label="Toggle menu"
+                        onClick={() => setIsMenuOpen((o) => !o)}
+                        className="rounded-lg p-2 text-slate-200 transition-colors hover:bg-white/5 lg:hidden"
+                        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                        aria-expanded={isMenuOpen}
                     >
                         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
-                </div>
+                </nav>
+            </Container>
 
-                {/* Mobile Menu */}
+            <AnimatePresence>
                 {isMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-slate-200">
-                        <div className="flex flex-col space-y-4">
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'calc(100dvh - 4rem)' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-y-auto border-t border-white/10 bg-ink-900/95 backdrop-blur-xl lg:hidden"
+                    >
+                        <Container className="flex flex-col gap-1 py-6">
                             {NAV_LINKS.map((link) => (
                                 <a
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="text-slate-800 hover:text-primary-700 font-medium transition-colors py-2"
+                                    className="flex items-center justify-between rounded-xl px-3 py-3 font-display text-lg text-slate-100 hover:bg-white/5"
                                 >
                                     {link.name}
+                                    <ArrowRight size={18} className="text-brand-300" />
                                 </a>
                             ))}
-                            <Button href="#contact" variant="primary" className="w-full">
-                                Request Consultation
+                            <Button href="/#contact" className="mt-4 w-full" onClick={() => setIsMenuOpen(false)}>
+                                Book a consultation
                             </Button>
-                        </div>
-                    </div>
+                        </Container>
+                    </motion.div>
                 )}
-            </Container>
-        </nav>
+            </AnimatePresence>
+        </header>
     );
 };
 

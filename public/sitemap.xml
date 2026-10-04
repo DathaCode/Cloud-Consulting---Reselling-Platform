@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://cloud.vinsolutions.lk/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://cloud.vinsolutions.lk/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cloud.vinsolutions.lk/blog/confluence-knowledge-management</loc><lastmod>2025-02-20</lastmod><priority>0.6</priority></url>
+  <url><loc>https://cloud.vinsolutions.lk/blog/jira-enterprise-best-practices</loc><lastmod>2025-02-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://cloud.vinsolutions.lk/blog/cloud-migration-mistakes</loc><lastmod>2025-02-08</lastmod><priority>0.6</priority></url>
+  <url><loc>https://cloud.vinsolutions.lk/blog/atlassian-cloud-migration-guide</loc><lastmod>2025-01-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://cloud.vinsolutions.lk/blog/aws-vs-oracle-cloud-comparison</loc><lastmod>2025-01-12</lastmod><priority>0.6</priority></url>
+</urlset>

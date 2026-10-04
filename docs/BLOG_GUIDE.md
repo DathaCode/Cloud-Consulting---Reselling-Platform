@@ -338,6 +338,6 @@ Consider adding:
 ## Support
 
 For questions about the blog system:
-- Email: contact@vincloudsolutions.com
+- Email: info@vinsolutions.lk
 - Check `src/hooks/useBlogData.js` for blog logic
 - Review existing posts for examples

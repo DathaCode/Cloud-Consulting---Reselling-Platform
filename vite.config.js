@@ -11,4 +11,8 @@ export default defineConfig({
             protocolImports: true,
         }),
     ],
+    build: {
+        // The 3D scenes are lazy-loaded, so three.js lands in its own on-demand chunk.
+        chunkSizeWarningLimit: 1100,
+    },
 })

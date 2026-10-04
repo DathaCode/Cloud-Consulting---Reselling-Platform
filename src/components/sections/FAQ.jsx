@@ -1,88 +1,83 @@
-import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import React, { useId, useState } from 'react';
+import { Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FAQ_ITEMS } from '../../utils/constants';
 import Container from '../common/Container';
 import Section from '../common/Section';
+import SectionHeading from '../common/SectionHeading';
+import Reveal from '../common/Reveal';
 
-const FAQItem = ({ item, index }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const FAQItem = ({ item, defaultOpen = false }) => {
+    const [isOpen, setIsOpen] = useState(defaultOpen);
+    const id = useId();
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
-            viewport={{ once: true }}
-            className="border-b border-slate-200 last:border-b-0"
-        >
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between py-6 text-left hover:text-primary-700 transition-colors"
-            >
-                <h3 className="text-lg font-semibold text-slate-900 pr-8">
+        <div className={`rounded-2xl border transition-colors ${isOpen ? 'border-brand-300/25 bg-white/[0.04]' : 'border-white/10 bg-white/[0.015]'}`}>
+            <h3 className="text-base font-medium md:text-lg">
+                <button
+                    onClick={() => setIsOpen((o) => !o)}
+                    aria-expanded={isOpen}
+                    aria-controls={`${id}-answer`}
+                    className="flex w-full items-center justify-between gap-6 px-5 py-5 text-left text-slate-100 md:px-6"
+                >
                     {item.question}
-                </h3>
-                <ChevronDown
-                    className={`w-5 h-5 text-primary-700 flex-shrink-0 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''
-                        }`}
-                />
-            </button>
-
-            <AnimatePresence>
+                    <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/10 transition-transform duration-300 ${isOpen ? 'rotate-45 text-glow' : 'text-slate-400'}`}>
+                        <Plus size={16} aria-hidden="true" />
+                    </span>
+                </button>
+            </h3>
+            <AnimatePresence initial={false}>
                 {isOpen && (
                     <motion.div
+                        id={`${id}-answer`}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                     >
-                        <p className="text-slate-600 pb-6">
-                            {item.answer}
-                        </p>
+                        <p className="px-5 pb-6 text-sm leading-relaxed text-slate-400 md:px-6 md:text-base">{item.answer}</p>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.div>
+        </div>
     );
 };
 
-const FAQ = () => {
-    return (
-        <Section bgColor="bg-slate-50">
-            <Container>
-                <div className="max-w-3xl mx-auto">
-                    <div className="text-center mb-12">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                            viewport={{ once: true }}
-                            className="text-4xl md:text-5xl font-bold text-primary-900 mb-4"
-                        >
-                            Frequently Asked Questions
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                            viewport={{ once: true }}
-                            className="text-xl text-slate-600"
-                        >
-                            Get answers to common questions about our services
-                        </motion.p>
-                    </div>
+// FAQPage structured data lets search engines show these answers as rich results.
+const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+};
 
-                    <div className="bg-white rounded-xl shadow-lg p-8">
-                        {FAQ_ITEMS.map((item, index) => (
-                            <FAQItem key={index} item={item} index={index} />
-                        ))}
-                    </div>
+const FAQ = () => (
+    <Section id="faq" labelledBy="faq-title">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        <Container>
+            <div className="grid gap-12 lg:grid-cols-12">
+                <div className="lg:col-span-4">
+                    <SectionHeading
+                        id="faq-title"
+                        align="left"
+                        eyebrow="FAQ"
+                        title="Questions,"
+                        highlight="answered."
+                        description="Can’t find what you need? Ask us directly — we reply within one business day."
+                    />
                 </div>
-            </Container>
-        </Section>
-    );
-};
+                <Reveal className="flex flex-col gap-3 lg:col-span-8">
+                    {FAQ_ITEMS.map((item, index) => (
+                        <FAQItem key={item.question} item={item} defaultOpen={index === 0} />
+                    ))}
+                </Reveal>
+            </div>
+        </Container>
+    </Section>
+);
 
 export default FAQ;

@@ -1,21 +1,18 @@
 import React from 'react';
 import { Search } from 'lucide-react';
 
-const BlogSearch = ({ value, onChange, placeholder = "Search articles..." }) => {
-    return (
-        <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Search className="text-slate-400" size={20} />
-            </div>
-            <input
-                type="text"
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={placeholder}
-                className="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100"
-            />
-        </div>
-    );
-};
+const BlogSearch = ({ value, onChange, placeholder = 'Search articles…' }) => (
+    <div className="relative">
+        <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} aria-hidden="true" />
+        <input
+            type="search"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            aria-label="Search articles"
+            className="input-field rounded-2xl py-3.5 pl-11"
+        />
+    </div>
+);
 
 export default BlogSearch;

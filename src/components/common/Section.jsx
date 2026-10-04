@@ -3,12 +3,13 @@ import React from 'react';
 const Section = ({
     children,
     className = '',
-    id = '',
-    bgColor = 'bg-white',
-    padding = 'py-16 md:py-24'
+    id,
+    bgColor = '',
+    padding = 'py-20 md:py-28',
+    labelledBy,
 }) => {
     return (
-        <section id={id} className={`${bgColor} ${padding} ${className}`}>
+        <section id={id} aria-labelledby={labelledBy} className={`relative ${bgColor} ${padding} ${className}`}>
             {children}
         </section>
     );

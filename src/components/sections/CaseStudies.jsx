@@ -1,105 +1,183 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { CASE_STUDIES } from '../../utils/constants';
+import React, { useCallback, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, Check, Sparkles } from 'lucide-react';
+import { CASE_CATEGORIES, CASE_STUDIES } from '../../utils/constants';
 import Container from '../common/Container';
 import Section from '../common/Section';
+import SectionHeading from '../common/SectionHeading';
+import SpotlightCard from '../common/SpotlightCard';
+import Reveal from '../common/Reveal';
+import Badge from '../common/Badge';
+import Button from '../common/Button';
+import Dialog from '../common/Dialog';
 
-const CaseStudyCard = ({ study, index }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-xl shadow-lg p-8 md:p-10"
-        >
-            <h3 className="text-2xl font-bold text-primary-900 mb-2">
-                {study.company}
-            </h3>
+const categoryLabel = (id) => CASE_CATEGORIES.find((c) => c.id === id)?.label;
 
-            <div className="mb-6">
-                <h4 className="text-sm font-bold text-slate-500 uppercase mb-2">Challenge</h4>
-                <p className="text-slate-700">{study.challenge}</p>
+const Results = ({ results, size = 'md' }) => (
+    <dl className="grid grid-cols-3 gap-3">
+        {results.map((r) => (
+            <div key={r.label} className="flex flex-col-reverse">
+                <dt className="mt-1 text-xs leading-snug text-slate-500">{r.label}</dt>
+                <dd className={`whitespace-nowrap font-display font-semibold text-gradient ${size === 'lg' ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}>{r.value}</dd>
             </div>
+        ))}
+    </dl>
+);
 
-            <div className="mb-6">
-                <h4 className="text-sm font-bold text-slate-500 uppercase mb-2">Solution</h4>
-                <p className="text-slate-700">{study.solution}</p>
+const FeaturedCard = ({ study, onOpen }) => (
+    <SpotlightCard as="article" className="h-full bg-gradient-to-br from-ai/10 via-white/[0.03] to-brand-500/10" glow="rgba(167,139,250,0.16)">
+        <div className="flex h-full flex-col p-7 md:p-9">
+            <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="ai"><Sparkles size={11} className="mr-1" />Built by VIN Cloud</Badge>
+                <Badge>{study.sector}</Badge>
             </div>
+            <h3 className="mt-5 text-2xl font-semibold md:text-3xl">{study.title}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-slate-400 md:text-base">{study.summary}</p>
+            <ul className="mt-6 space-y-2.5 text-sm">
+                {study.highlights.slice(0, 3).map((h) => (
+                    <li key={h} className="flex items-start gap-2 text-slate-300">
+                        <Check size={16} className="mt-0.5 shrink-0 text-glow" aria-hidden="true" />{h}
+                    </li>
+                ))}
+            </ul>
+            <div className="mt-auto pt-8">
+                <div className="border-t border-white/10 pt-6"><Results results={study.results} size="lg" /></div>
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex flex-wrap gap-1.5">{study.stack.slice(0, 3).map((t) => <Badge key={t}>{t}</Badge>)}</div>
+                    <button onClick={() => onOpen(study)} className="inline-flex items-center gap-1 text-sm font-semibold text-brand-200 hover:text-glow">
+                        Read case study <ArrowUpRight size={16} />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </SpotlightCard>
+);
 
-            <div>
-                <h4 className="text-sm font-bold text-slate-500 uppercase mb-3">Results</h4>
-                <ul className="space-y-2">
-                    {study.results.map((result, idx) => (
-                        <li key={idx} className="flex items-start space-x-2">
-                            <svg
-                                className="w-5 h-5 text-accent mt-0.5 flex-shrink-0"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>
-                            <span className="text-slate-800 font-medium">{result}</span>
+const CompactCard = ({ study, onOpen }) => (
+    <SpotlightCard as="article" className="h-full">
+        <button onClick={() => onOpen(study)} className="flex h-full w-full flex-col p-6 text-left md:p-7" aria-label={`Read case study: ${study.title}`}>
+            <div className="flex flex-wrap gap-2">
+                <Badge variant="accent">{categoryLabel(study.category)}</Badge>
+                <Badge>{study.sector}</Badge>
+            </div>
+            <h3 className="mt-4 text-lg font-semibold md:text-xl">{study.title}</h3>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">{study.summary}</p>
+            <div className="mt-6 border-t border-white/10 pt-5"><Results results={study.results} /></div>
+            <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-200 group-hover:text-glow">
+                View details <ArrowUpRight size={16} />
+            </span>
+        </button>
+    </SpotlightCard>
+);
+
+const CaseDetail = ({ study }) => (
+    <article>
+        <header className="border-b border-white/10 bg-gradient-to-br from-brand-500/15 to-ai/10 p-7 pr-16 md:p-9 md:pr-16">
+            <div className="flex flex-wrap gap-2">
+                {study.featured && <Badge variant="ai">Built by VIN Cloud</Badge>}
+                <Badge variant="accent">{categoryLabel(study.category)}</Badge>
+                <Badge>{study.sector}</Badge>
+            </div>
+            <h3 id="case-dialog-title" className="mt-4 text-2xl font-semibold md:text-3xl">{study.title}</h3>
+            <div className="mt-7"><Results results={study.results} size="lg" /></div>
+        </header>
+        <div className="space-y-7 p-7 md:p-9">
+            {[['Challenge', study.challenge], ['Solution', study.solution]].map(([label, text]) => (
+                <section key={label}>
+                    <h4 className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">{label}</h4>
+                    <p className="mt-2 leading-relaxed text-slate-300">{text}</p>
+                </section>
+            ))}
+            <section>
+                <h4 className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">Highlights</h4>
+                <ul className="mt-3 space-y-2.5">
+                    {study.highlights.map((h) => (
+                        <li key={h} className="flex items-start gap-2 text-slate-300">
+                            <Check size={16} className="mt-1 shrink-0 text-glow" aria-hidden="true" />{h}
                         </li>
                     ))}
                 </ul>
+            </section>
+            <section>
+                <h4 className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand-300">Technology</h4>
+                <div className="mt-3 flex flex-wrap gap-1.5">{study.stack.map((t) => <Badge key={t}>{t}</Badge>)}</div>
+            </section>
+            <div className="flex flex-col items-start justify-between gap-4 rounded-2xl border border-brand-300/20 bg-brand-500/10 p-5 sm:flex-row sm:items-center">
+                <p className="text-sm text-slate-300">Want something similar for your organization?</p>
+                <Button href={`/?service=${study.category === 'cloud-infra' || study.category === 'data-migration' ? 'cloud' : 'ai'}#contact`} size="sm">
+                    Start a similar project <ArrowRight size={16} />
+                </Button>
             </div>
-        </motion.div>
-    );
-};
+        </div>
+    </article>
+);
 
 const CaseStudies = () => {
+    const [category, setCategory] = useState('all');
+    const [openStudy, setOpenStudy] = useState(null);
+    const closeStudy = useCallback(() => setOpenStudy(null), []);
+
+    const featured = CASE_STUDIES.filter((s) => s.featured);
+    const visible = useMemo(
+        () => (category === 'all' ? CASE_STUDIES.filter((s) => !s.featured) : CASE_STUDIES.filter((s) => s.category === category)),
+        [category]
+    );
+    const showFeatured = category === 'all';
+
     return (
-        <Section bgColor="bg-white">
+        <Section id="work" labelledBy="work-title" className="bg-ink-950/40">
             <Container>
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-primary-900 mb-4"
-                    >
-                        Case Studies & Results
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        viewport={{ once: true }}
-                        className="text-xl text-slate-600 max-w-3xl mx-auto"
-                    >
-                        Real results from companies we've helped transform their cloud infrastructure
-                    </motion.p>
-                </div>
+                <SectionHeading
+                    id="work-title"
+                    eyebrow="Our work"
+                    title="Real solutions,"
+                    highlight="measurable outcomes."
+                    description="From AI products we’ve built in-house to cloud platforms we run every day — a look at what we deliver."
+                />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                    {CASE_STUDIES.map((study, index) => (
-                        <CaseStudyCard key={study.company} study={study} index={index} />
-                    ))}
-                </div>
+                <Reveal className="mt-10 flex justify-center">
+                    <div role="tablist" aria-label="Filter case studies" className="flex max-w-full gap-1.5 overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.02] p-1.5">
+                        {CASE_CATEGORIES.map((c) => (
+                            <button
+                                key={c.id}
+                                role="tab"
+                                aria-selected={category === c.id}
+                                onClick={() => setCategory(c.id)}
+                                className={`shrink-0 rounded-xl px-3.5 py-2 text-sm font-medium transition-colors ${category === c.id ? 'bg-white/10 text-white' : 'text-slate-400 hover:text-slate-100'}`}
+                            >
+                                {c.label}
+                            </button>
+                        ))}
+                    </div>
+                </Reveal>
 
-                {/* Future expansion note */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true }}
-                    className="text-center"
-                >
-                    <p className="text-slate-500 mb-4">Want to see more success stories?</p>
-                    <a
-                        href="#contact"
-                        className="text-primary-700 hover:text-primary-500 font-semibold underline"
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={category}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.25 }}
                     >
-                        Contact us to learn about similar results for your industry
-                    </a>
-                </motion.div>
+                        {showFeatured && (
+                            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+                                {featured.map((s) => <FeaturedCard key={s.id} study={s} onOpen={setOpenStudy} />)}
+                            </div>
+                        )}
+                        <div className={`grid gap-6 md:grid-cols-2 ${showFeatured ? 'mt-6' : 'mt-10'}`}>
+                            {visible.map((s) =>
+                                s.featured && !showFeatured
+                                    ? <FeaturedCard key={s.id} study={s} onOpen={setOpenStudy} />
+                                    : <CompactCard key={s.id} study={s} onOpen={setOpenStudy} />
+                            )}
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </Container>
+
+            <Dialog open={!!openStudy} onClose={closeStudy} labelledBy="case-dialog-title">
+                {openStudy && <CaseDetail study={openStudy} />}
+            </Dialog>
         </Section>
     );
 };

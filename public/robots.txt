@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://your-domain.com/sitemap.xml
-
-# Disallow crawling of admin or private areas (future expansion)
-# Disallow: /admin/
+Sitemap: https://cloud.vinsolutions.lk/sitemap.xml

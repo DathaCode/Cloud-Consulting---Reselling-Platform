@@ -1,22 +1,116 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Vin Cloud Solutions - Expert cloud consulting for Atlassian, AWS, and Oracle. Secure migrations, cost optimization, and enterprise licensing." />
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <title>Vin Cloud Solutions | Cloud Consulting & Reselling</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>VIN Cloud Solutions | AI, Software Development & Cloud Consulting in Sri Lanka</title>
+    <meta name="description" content="VIN Cloud Solutions (Ragama, Sri Lanka) helps organizations across South Asia modernize and scale with AI-powered implementations, web & mobile software development, and cloud consulting for AWS, Azure, Google Cloud, Microsoft 365, Oracle and Atlassian." />
+    <meta name="keywords" content="AI implementation, generative AI consulting, web development, mobile app development, cloud consulting, AWS consulting, Azure consulting, Google Cloud, Google Workspace, Microsoft 365, Oracle Cloud, Atlassian Jira Confluence, system integration, digital transformation Sri Lanka, AI solutions Sri Lanka, data migration, managed cloud" />
+    <meta name="author" content="VIN Cloud Solutions" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://cloud.vinsolutions.lk/" />
+    <meta name="theme-color" content="#070D16" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VIN Cloud Solutions" />
+    <meta property="og:title" content="VIN Cloud Solutions | AI, Software Development & Cloud Consulting" />
+    <meta property="og:description" content="AI-powered innovation, web & mobile development, and cloud consulting across AWS, Azure, Google, Microsoft 365, Oracle and Atlassian." />
+    <meta property="og:url" content="https://cloud.vinsolutions.lk/" />
+    <meta property="og:image" content="https://cloud.vinsolutions.lk/brand/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="VIN Cloud Solutions — Reimagine what's possible through technology" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="geo.region" content="LK-1" />
+    <meta name="geo.placename" content="Ragama, Sri Lanka" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="VIN Cloud Solutions | AI, Software Development & Cloud Consulting" />
+    <meta name="twitter:description" content="AI-powered innovation, web & mobile development, and cloud consulting across AWS, Azure, Google, Microsoft 365, Oracle and Atlassian." />
+    <meta name="twitter:image" content="https://cloud.vinsolutions.lk/brand/og-image.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="preload" as="image" href="/brand/vin-mark.png" />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://cloud.vinsolutions.lk/#organization",
+          "name": "VIN Cloud Solutions",
+          "url": "https://cloud.vinsolutions.lk/",
+          "logo": "https://cloud.vinsolutions.lk/brand/vin-logo.png",
+          "email": "info@vinsolutions.lk",
+          "telephone": "+94703734412",
+          "address": { "@type": "PostalAddress", "addressLocality": "Ragama", "addressRegion": "Western Province", "addressCountry": "LK" },
+          "sameAs": ["https://www.facebook.com/profile.php?id=61593988771682"],
+          "contactPoint": [{ "@type": "ContactPoint", "telephone": "+94703734412", "contactType": "sales", "areaServed": ["LK", "South Asia"], "availableLanguage": ["English", "Sinhala"] }],
+          "description": "Digital transformation partner in South Asia specializing in AI-powered implementations, web & mobile software development, technical solutioning and cloud infrastructure consultation.",
+          "areaServed": "South Asia",
+          "knowsAbout": ["Artificial Intelligence", "Generative AI", "Web Development", "Mobile App Development", "Cloud Computing", "Amazon Web Services", "Microsoft Azure", "Google Cloud", "Google Workspace", "Microsoft 365", "Oracle Cloud Infrastructure", "Atlassian", "System Integration"]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://cloud.vinsolutions.lk/#service",
+          "name": "VIN Cloud Solutions",
+          "url": "https://cloud.vinsolutions.lk/",
+          "image": "https://cloud.vinsolutions.lk/brand/og-image.png",
+          "parentOrganization": { "@id": "https://cloud.vinsolutions.lk/#organization" },
+          "telephone": "+94703734412",
+          "address": { "@type": "PostalAddress", "addressLocality": "Ragama", "addressRegion": "Western Province", "addressCountry": "LK" },
+          "areaServed": "South Asia",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Technology Services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI-Powered Innovation & Implementation" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web & Mobile Software Development" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Infrastructure Consultation" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data Migration" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Managed Cloud Infrastructure (AWS, Azure, Oracle)" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical Solutioning & Architecture" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Enterprise Integrations & Automation" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Products & Licensing" } }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://cloud.vinsolutions.lk/#website",
+          "url": "https://cloud.vinsolutions.lk/",
+          "name": "VIN Cloud Solutions",
+          "publisher": { "@id": "https://cloud.vinsolutions.lk/#organization" }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>VIN Cloud Solutions</h1>
+      <p>AI-powered innovation, web &amp; mobile software development, technical solutioning and cloud consulting
+        for AWS, Microsoft Azure, Google Cloud &amp; Workspace, Microsoft 365, Oracle and Atlassian.
+        Ragama, Sri Lanka · +94 70 373 4412 · info@vinsolutions.lk</p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
   </body>
 </html>

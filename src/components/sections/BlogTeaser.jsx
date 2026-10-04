@@ -1,15 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useBlogData } from '../../hooks/useBlogData';
 import BlogCard from '../blog/BlogCard';
 import Container from '../common/Container';
 import Section from '../common/Section';
+import SectionHeading from '../common/SectionHeading';
+import Reveal from '../common/Reveal';
 import Button from '../common/Button';
 
 const BlogTeaser = () => {
-    const navigate = useNavigate();
     const { getLatestPosts, loading } = useBlogData();
     const latestPosts = getLatestPosts(3);
 
@@ -18,54 +17,30 @@ const BlogTeaser = () => {
     }
 
     return (
-        <Section bgColor="bg-white">
+        <Section id="insights" labelledBy="insights-title">
             <Container>
-                <div className="text-center mb-12">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-primary-900 mb-4"
-                    >
-                        Latest Articles
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        viewport={{ once: true }}
-                        className="text-xl text-slate-600"
-                    >
-                        Insights, best practices, and expert tips for cloud transformation
-                    </motion.p>
+                <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+                    <SectionHeading
+                        id="insights-title"
+                        align="left"
+                        eyebrow="Insights"
+                        title="Latest from"
+                        highlight="our engineers."
+                        description="Practical guides on cloud, collaboration and modernization."
+                    />
+                    <Reveal>
+                        <Button href="/blog" variant="secondary">
+                            All articles <ArrowRight size={16} />
+                        </Button>
+                    </Reveal>
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
-                >
-                    {latestPosts.map((post) => (
-                        <BlogCard
-                            key={post.slug}
-                            post={post}
-                            onClick={() => navigate(`/blog/${post.slug}`)}
-                        />
+                <div className="mt-12 grid gap-6 md:grid-cols-3">
+                    {latestPosts.map((post, i) => (
+                        <Reveal key={post.slug} delay={i * 0.08}>
+                            <BlogCard post={post} />
+                        </Reveal>
                     ))}
-                </motion.div>
-
-                <div className="text-center">
-                    <Button
-                        href="/blog"
-                        variant="outline"
-                        className="inline-flex items-center space-x-2"
-                    >
-                        <span>View All Articles</span>
-                        <ArrowRight size={20} />
-                    </Button>
                 </div>
             </Container>
         </Section>

@@ -8,7 +8,7 @@ A modern, professional single-page application for cloud consulting and product 
 - **Responsive Design**: Mobile-first design that works on all devices
 - **Blog System**: Markdown-based blog with frontmatter support
 - **Contact Form**: Integrated with Formspree for lead generation
-- **SEO Optimized**: React Helmet for dynamic meta tags
+- **SEO Optimized**: per-route meta tags via `useSeo` (src/utils/seo.js), JSON-LD structured data, sitemap & Open Graph image
 - **Zero-Cost Hosting**: Deployed on Cloudflare Pages (FREE)
 - **Smooth Animations**: Framer Motion for professional animations
 
@@ -27,7 +27,7 @@ A modern, professional single-page application for cloud consulting and product 
 - **Forms**: Formspree integration
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **SEO**: React Helmet Async
+- **3D**: three.js + React Three Fiber (lazy-loaded)
 - **Hosting**: Cloudflare Pages
 - **CI/CD**: GitHub Actions
 
@@ -64,7 +64,7 @@ Create a `.env.local` file with:
 ```env
 VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
 VITE_COMPANY_NAME=Vin Cloud Solutions
-VITE_COMPANY_EMAIL=contact@vincloudsolutions.com
+VITE_COMPANY_EMAIL=info@vinsolutions.lk
 VITE_COMPANY_PHONE=+1 (555) 000-0000
 ```
 
@@ -212,8 +212,8 @@ Contributions are welcome! Please follow these steps:
 ## 📞 Support
 
 For questions or issues:
-- Email: contact@vincloudsolutions.com
-- Website: www.vincloudsolutions.com
+- Email: info@vinsolutions.lk
+- Website: cloud.vinsolutions.lk
 
 ## 🙏 Acknowledgments
 

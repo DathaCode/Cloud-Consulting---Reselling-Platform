@@ -1,120 +1,122 @@
 import React from 'react';
-import { Mail, Phone, Linkedin, Twitter, Github } from 'lucide-react';
-import { COMPANY_INFO, SOCIAL_LINKS, NAV_LINKS } from '../../utils/constants';
+import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { COMPANY_INFO, SOCIAL_LINKS, NAV_LINKS, SERVICES, PLATFORMS, WHATSAPP_URL } from '../../utils/constants';
 import Container from './Container';
+import BrandIcon from './BrandIcon';
+
+// Profiles with an empty URL in constants.js stay hidden until they're filled in.
+const socials = [
+    { href: WHATSAPP_URL, label: 'WhatsApp', icon: 'whatsapp' },
+    { href: SOCIAL_LINKS.facebook, label: 'Facebook', icon: 'facebook' },
+    { href: SOCIAL_LINKS.linkedin, label: 'LinkedIn', icon: 'linkedin' },
+    { href: SOCIAL_LINKS.github, label: 'GitHub', icon: 'github' },
+    { href: SOCIAL_LINKS.tiktok, label: 'TikTok', icon: 'tiktok' },
+].filter((s) => s.href);
+
+const FooterColumn = ({ title, children }) => (
+    <div>
+        <h3 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-slate-500">{title}</h3>
+        <ul className="space-y-2.5 text-sm">{children}</ul>
+    </div>
+);
+
+const FooterLink = ({ href, children }) => (
+    <li>
+        <a href={href} className="text-slate-400 transition-colors hover:text-brand-200">
+            {children}
+        </a>
+    </li>
+);
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-slate-900 text-white">
-            <Container>
-                <div className="py-12 md:py-16">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        {/* Brand Section */}
-                        <div className="md:col-span-2">
-                            <div className="flex items-center space-x-3 mb-4">
-                                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
-                                    <span className="text-white font-bold text-xl">V</span>
-                                </div>
-                                <span className="text-white font-bold text-xl">
-                                    {COMPANY_INFO.name}
+        <footer className="relative overflow-hidden border-t border-white/10 bg-ink-950">
+            <div aria-hidden="true" className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-brand-500/10 blur-3xl" />
+
+            <Container className="relative">
+                <div className="grid grid-cols-2 gap-10 py-16 md:grid-cols-12">
+                    <div className="col-span-2 md:col-span-4">
+                        <a href="/" aria-label="VIN Cloud Solutions — home" className="inline-flex items-center gap-4">
+                            <span className="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-white to-brand-50 shadow-glow">
+                                <img src="/brand/vin-logo.png" alt="VIN Cloud Solutions logo" className="h-11 w-auto" width="575" height="627" loading="lazy" />
+                            </span>
+                            <span className="font-display text-xl font-semibold text-slate-50">
+                                VIN Cloud Solutions
+                            </span>
+                        </a>
+                        <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
+                            Helping organizations across {COMPANY_INFO.region} modernize, scale and thrive with AI, software and cloud — one solution at a time.
+                        </p>
+                        <div className="mt-6 flex gap-2">
+                            {socials.map(({ href, label, icon }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={label}
+                                    className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 text-slate-400 transition-colors hover:border-brand-300/40 hover:text-brand-200"
+                                >
+                                    <BrandIcon name={icon} size={17} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="md:col-span-3">
+                        <FooterColumn title="Services">
+                            {SERVICES.map((s) => (
+                                <FooterLink key={s.id} href={`/#service-${s.id}`}>{s.short}</FooterLink>
+                            ))}
+                        </FooterColumn>
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <FooterColumn title="Platforms">
+                            {PLATFORMS.map((p) => (
+                                <FooterLink key={p.id} href="/#platforms">{p.name}</FooterLink>
+                            ))}
+                        </FooterColumn>
+                    </div>
+
+                    <div className="col-span-2 md:col-span-3">
+                        <FooterColumn title="Contact">
+                            <li className="flex items-start gap-2.5">
+                                <Mail size={16} className="mt-0.5 shrink-0 text-brand-300" />
+                                <a href={`mailto:${COMPANY_INFO.email}`} className="text-slate-400 hover:text-brand-200">
+                                    {COMPANY_INFO.email}
+                                </a>
+                            </li>
+                            <li className="flex items-start gap-2.5">
+                                <Phone size={16} className="mt-0.5 shrink-0 text-brand-300" />
+                                <span className="text-slate-400">
+                                    <a href={`tel:${COMPANY_INFO.phone.replace(/[^\d+]/g, '')}`} className="hover:text-brand-200">{COMPANY_INFO.phone}</a>
+                                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="block text-xs text-emerald-400/90 hover:text-emerald-300">Call or WhatsApp</a>
                                 </span>
-                            </div>
-                            <p className="text-slate-300 mb-4 max-w-md">
-                                {COMPANY_INFO.tagline}. Expert guidance for Atlassian Products, AWS & Oracle Cloud Infrastructure, and enterprise cloud solutions.
-                            </p>
-                            <div className="flex space-x-4">
-                                {SOCIAL_LINKS.linkedin && (
-                                    <a
-                                        href={SOCIAL_LINKS.linkedin}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-slate-300 hover:text-accent transition-colors"
-                                        aria-label="LinkedIn"
-                                    >
-                                        <Linkedin size={20} />
-                                    </a>
-                                )}
-                                {SOCIAL_LINKS.twitter && (
-                                    <a
-                                        href={SOCIAL_LINKS.twitter}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-slate-300 hover:text-accent transition-colors"
-                                        aria-label="Twitter"
-                                    >
-                                        <Twitter size={20} />
-                                    </a>
-                                )}
-                                {SOCIAL_LINKS.github && (
-                                    <a
-                                        href={SOCIAL_LINKS.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-slate-300 hover:text-accent transition-colors"
-                                        aria-label="GitHub"
-                                    >
-                                        <Github size={20} />
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Quick Links */}
-                        <div>
-                            <h3 className="text-white font-bold mb-4">Quick Links</h3>
-                            <ul className="space-y-2">
-                                {NAV_LINKS.map((link) => (
-                                    <li key={link.name}>
-                                        <a
-                                            href={link.href}
-                                            className="text-slate-300 hover:text-accent transition-colors"
-                                        >
-                                            {link.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Contact Info */}
-                        <div>
-                            <h3 className="text-white font-bold mb-4">Contact</h3>
-                            <ul className="space-y-3">
-                                <li className="flex items-start space-x-2">
-                                    <Mail size={18} className="text-accent mt-1 flex-shrink-0" />
-                                    <a
-                                        href={`mailto:${COMPANY_INFO.email}`}
-                                        className="text-slate-300 hover:text-accent transition-colors"
-                                    >
-                                        {COMPANY_INFO.email}
-                                    </a>
-                                </li>
-                                <li className="flex items-start space-x-2">
-                                    <Phone size={18} className="text-accent mt-1 flex-shrink-0" />
-                                    <a
-                                        href={`tel:${COMPANY_INFO.phone.replace(/\s/g, '')}`}
-                                        className="text-slate-300 hover:text-accent transition-colors"
-                                    >
-                                        {COMPANY_INFO.phone}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                            <li className="flex items-start gap-2.5">
+                                <MapPin size={16} className="mt-0.5 shrink-0 text-brand-300" />
+                                <span className="text-slate-400">{COMPANY_INFO.location}<span className="block text-xs text-slate-500">Serving {COMPANY_INFO.region} &amp; beyond</span></span>
+                            </li>
+                        </FooterColumn>
+                        <a
+                            href="/#contact"
+                            className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-200 hover:text-glow"
+                        >
+                            Start a project <ArrowUpRight size={16} />
+                        </a>
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="border-t border-slate-800 py-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
-                        <p className="text-slate-400 text-sm">
-                            © {currentYear} {COMPANY_INFO.name}. All rights reserved.
-                        </p>
-                        <p className="text-slate-400 text-sm">
-                            Powered by Cloudflare Pages
-                        </p>
-                    </div>
+                <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-6 text-xs text-slate-500 md:flex-row">
+                    <p>© {currentYear} {COMPANY_INFO.name}. All rights reserved.</p>
+                    <nav aria-label="Footer" className="flex flex-wrap gap-5">
+                        {NAV_LINKS.map((l) => (
+                            <a key={l.name} href={l.href} className="hover:text-slate-300">{l.name}</a>
+                        ))}
+                    </nav>
                 </div>
             </Container>
         </footer>

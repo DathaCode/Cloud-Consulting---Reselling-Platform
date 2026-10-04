@@ -1,26 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import BlogCard from './BlogCard';
+import Reveal from '../common/Reveal';
 
 const BlogList = ({ posts }) => {
-    const navigate = useNavigate();
-
     if (!posts || posts.length === 0) {
         return (
-            <div className="text-center py-12">
-                <p className="text-slate-600 text-lg">No blog posts found.</p>
+            <div className="rounded-2xl border border-dashed border-white/10 py-16 text-center">
+                <p className="text-slate-400">No articles found.</p>
             </div>
         );
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-                <BlogCard
-                    key={post.slug}
-                    post={post}
-                    onClick={() => navigate(`/blog/${post.slug}`)}
-                />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post, i) => (
+                <Reveal key={post.slug} delay={(i % 3) * 0.06}>
+                    <BlogCard post={post} />
+                </Reveal>
             ))}
         </div>
     );

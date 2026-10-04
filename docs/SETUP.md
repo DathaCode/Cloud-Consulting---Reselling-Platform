@@ -38,7 +38,7 @@ This will install all required packages including:
 - Framer Motion
 - Lucide React
 - Gray Matter (for blog)
-- React Helmet Async
+- three.js + @react-three/fiber + @react-three/drei (3D explorers)
 
 ## Step 3: Configure Environment Variables
 
@@ -56,7 +56,7 @@ VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
 
 # Company Information (optional - defaults in constants.js)
 VITE_COMPANY_NAME=Vin Cloud Solutions
-VITE_COMPANY_EMAIL=contact@vincloudsolutions.com
+VITE_COMPANY_EMAIL=info@vinsolutions.lk
 VITE_COMPANY_PHONE=+1 (555) 000-0000
 
 # Social Media (optional)
@@ -187,4 +187,4 @@ Visit `http://localhost:4173` to see the production build.
 
 If you encounter issues:
 - Check the [GitHub Issues](https://github.com/your-username/vin-cloud-solutions/issues)
-- Contact: contact@vincloudsolutions.com
+- Contact: info@vinsolutions.lk

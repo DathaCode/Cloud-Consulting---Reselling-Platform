@@ -63,7 +63,7 @@ In the "Environment variables (optional)" section, add the variables from your `
 |---------------|-------|
 | `VITE_FORMSPREE_ENDPOINT` | `https://formspree.io/f/YOUR_ID` |
 | `VITE_COMPANY_NAME` | `Vin Cloud Solutions` |
-| `VITE_COMPANY_EMAIL` | `contact@vincloudsolutions.com` |
+| `VITE_COMPANY_EMAIL` | `info@vinsolutions.lk` |
 
 Click **Save and Deploy**.
 
@@ -88,7 +88,7 @@ If you don't want to use GitHub, you can deploy manually.
 
 1. In your Cloudflare Pages project, go to **Custom domains**.
 2. Click **Set up a custom domain**.
-3. Enter your domain (e.g., `vincloudsolutions.com`).
+3. Enter your domain (e.g., `cloud.vinsolutions.lk`).
 4. Follow the instructions to update your DNS records.
    - If your domain is managed by Cloudflare, it's automatic.
    - If managed elsewhere (GoDaddy, Namecheap), you'll need to add a CNAME record pointing to your Cloudflare Pages subdomain (e.g., `vin-cloud-solutions.pages.dev`).

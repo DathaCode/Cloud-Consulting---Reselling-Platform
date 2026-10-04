@@ -14,9 +14,9 @@ Update `COMPANY_INFO` in `src/utils/constants.js`:
 export const COMPANY_INFO = {
   name: 'Vin Cloud Solutions',
   tagline: 'Cloud Solutions & Consulting Experts',
-  email: 'contact@vincloudsolutions.com',
+  email: 'info@vinsolutions.lk',
   phone: '+1 (555) 000-0000',
-  website: 'www.vincloudsolutions.com',
+  website: 'cloud.vinsolutions.lk',
 };
 ```
 
