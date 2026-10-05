@@ -28,7 +28,7 @@ react-markdown 10 · gray-matter 4. Node 20.
 - Don't claim partner/certification status (e.g. "AWS Advanced Partner") unless the owner confirms it.
 
 ## Source priority
-Official docs/changelogs (react.dev, vite.dev, threejs.org, docs.pmnd.rs, tailwindcss.com v3 docs, formspree.io/help, developers.cloudflare.com)
+Official docs/changelogs (react.dev, vite.dev, threejs.org, docs.pmnd.rs, tailwindcss.com v3 docs, formspree.io/help, docs.aws.amazon.com)
 → package GitHub issues → reputable blogs. Treat AI-generated or undated answers as unverified.
 
 ## Red flags — stop and ask the owner

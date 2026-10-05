@@ -1,8 +1,8 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html, OrbitControls } from '@react-three/drei';
-import { isCoarsePointer, prefersReducedMotion } from './utils';
+import { isCoarsePointer, prefersReducedMotion, useLabelsReady } from './utils';
 
 const INPUTS = ['Documents', 'Tickets', 'Email & chat', 'Databases', 'Images & forms'];
 const HIDDEN = [7, 7];
@@ -30,9 +30,7 @@ const Network = ({ outputs, activeIndex }) => {
     const layers = useMemo(() => buildLayers(outputs), [outputs]);
     const nodes = useMemo(() => layers.flatMap((layer, li) => layer.map((p, i) => ({ p, li, i }))), [layers]);
     const last = layers.length - 1;
-    // drei <Html> can miss its DOM container when mounted in the canvas's first commit; mount labels a tick later.
-    const [labelsReady, setLabelsReady] = useState(false);
-    useEffect(() => setLabelsReady(true), []);
+    const labelsReady = useLabelsReady();
 
     const edgeGeometry = useMemo(() => {
         const pts = [];

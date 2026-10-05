@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import * as THREE from 'three';
 
 export const latLonToVec3 = (lat, lon, radius = 1) => {
@@ -8,6 +9,16 @@ export const latLonToVec3 = (lat, lon, radius = 1) => {
         radius * Math.cos(phi),
         radius * Math.sin(phi) * Math.sin(theta)
     );
+};
+
+/**
+ * drei <Html> mounted in a canvas's first commit can silently never appear;
+ * gate labels on this so they mount one tick later.
+ */
+export const useLabelsReady = () => {
+    const [ready, setReady] = useState(false);
+    useEffect(() => setReady(true), []);
+    return ready;
 };
 
 // Orbit controls capture touch drags, which would block page scrolling on phones.

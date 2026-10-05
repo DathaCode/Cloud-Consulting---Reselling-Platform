@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Billboard, Html, Line, OrbitControls, Sparkles, useCursor, useTexture } from '@react-three/drei';
-import { isCoarsePointer, prefersReducedMotion, createGlowMaterial } from './utils';
+import { isCoarsePointer, prefersReducedMotion, createGlowMaterial, useLabelsReady } from './utils';
 
 const RING = 2.5;
 
@@ -42,6 +42,7 @@ const Core = () => {
 
 const PlatformNode = ({ platform, position, selected, onSelect }) => {
     const [hovered, setHovered] = useState(false);
+    const labelsReady = useLabelsReady();
     useCursor(hovered);
     const ref = useRef();
     const glow = useMemo(() => createGlowMaterial(platform.color, 0.9, 2.6), [platform.color]);
@@ -74,7 +75,7 @@ const PlatformNode = ({ platform, position, selected, onSelect }) => {
                     <sphereGeometry args={[0.5, 8, 8]} />
                 </mesh>
             </group>
-            <Html center position={[0, -0.6, 0]} zIndexRange={[20, 0]}>
+            {labelsReady && <Html center position={[0, -0.6, 0]} zIndexRange={[20, 0]}>
                 <button
                     type="button"
                     onClick={() => onSelect(platform.id)}
@@ -85,7 +86,7 @@ const PlatformNode = ({ platform, position, selected, onSelect }) => {
                 >
                     {platform.name}
                 </button>
-            </Html>
+            </Html>}
         </group>
     );
 };

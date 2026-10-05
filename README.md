@@ -1,228 +1,61 @@
-# Vin Cloud Solutions - Cloud Consulting & Reselling Platform
+# VIN Cloud Solutions — website
 
-A modern, professional single-page application for cloud consulting and product reselling services. Built with React, Vite, and Tailwind CSS, deployed on Cloudflare Pages.
+Company website for **VIN Cloud Solutions** (Ragama, Sri Lanka): AI solutions & integrations, web and mobile development,
+cloud consulting (AWS, Azure, Google, Microsoft 365, Oracle, Atlassian), data migration and managed cloud.
 
-## 🚀 Features
+Live: **https://cloud.vinsolutions.lk** · Hosting: AWS Amplify (manual deploys)
 
-- **Modern Tech Stack**: React 18 + Vite 5 + Tailwind CSS
-- **Responsive Design**: Mobile-first design that works on all devices
-- **Blog System**: Markdown-based blog with frontmatter support
-- **Contact Form**: Integrated with Formspree for lead generation
-- **SEO Optimized**: per-route meta tags via `useSeo` (src/utils/seo.js), JSON-LD structured data, sitemap & Open Graph image
-- **Zero-Cost Hosting**: Deployed on Cloudflare Pages (FREE)
-- **Smooth Animations**: Framer Motion for professional animations
+## Features
+- Dark, techy single-page site with three interactive **3D explorers** (hero globe, AI neural network, cloud-platform orbit)
+- Services, AI, platforms, case studies ("Our work"), integrations, process, FAQ and blog
+- Multi-step **project request form** (Formspree) with WhatsApp follow-up, plus a floating WhatsApp button
+- SEO: per-page meta tags, JSON-LD (Organization, FAQ, BlogPosting), sitemap, Open Graph image, favicons/PWA icons
+- Accessible (keyboard, reduced motion, semantic headings) and mobile-first
 
-## 📋 Services
+## Tech stack
+React 19 · Vite 6 · Tailwind CSS 3 · framer-motion · three.js + React Three Fiber + drei · React Router 7 ·
+lucide-react · react-markdown + gray-matter (blog). Plain JavaScript (JSX). Node.js 20+.
 
-- **Atlassian Cloud Solutions**: Jira, Confluence, Bitbucket configuration and migration
-- **AWS & Oracle Cloud Infrastructure**: Architecture design, cost optimization, migrations
-- **Cloud Products & Licensing**: Competitive pricing and enterprise solutions
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React 18, Vite 5
-- **Styling**: Tailwind CSS 3.4 with custom design system
-- **Routing**: React Router 6
-- **Blog**: Markdown with gray-matter for frontmatter
-- **Forms**: Formspree integration
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **3D**: three.js + React Three Fiber (lazy-loaded)
-- **Hosting**: Cloudflare Pages
-- **CI/CD**: GitHub Actions
-
-## 🏃 Getting Started
-
-### Prerequisites
-
-- Node.js 20.x or higher
-- npm or yarn
-
-### Installation
-
+## Getting started
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/vin-cloud-solutions.git
-cd vin-cloud-solutions
-
-# Install dependencies
-npm install
-
-# Create environment file
-cp .env.example .env.local
-
-# Start development server
-npm run dev
+npm ci
+npm run dev            # http://localhost:5173
 ```
 
-Visit `http://localhost:5173` to see the application.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Development server with hot reload |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the production build at http://localhost:4173 |
+| `npm run package:amplify` | Build + create `release/vin-cloud-site-<time>.zip` for AWS Amplify |
 
-### Environment Variables
+Environment variables: see `.env.example` (only `VITE_FORMSPREE_ENDPOINT`, which already defaults to the live form).
 
-Create a `.env.local` file with:
-
-```env
-VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID
-VITE_COMPANY_NAME=Vin Cloud Solutions
-VITE_COMPANY_EMAIL=info@vinsolutions.lk
-VITE_COMPANY_PHONE=+1 (555) 000-0000
-```
-
-## 📁 Project Structure
-
+## Project structure
 ```
 src/
+├── utils/constants.js        # all site copy & data (company info, services, case studies, FAQ…)
 ├── components/
-│   ├── common/          # Reusable components (Button, Navbar, Footer)
-│   ├── sections/        # Page sections (Hero, Services, Contact)
-│   └── blog/            # Blog-specific components
-├── pages/               # Route pages (Home, Blog, BlogPost, NotFound)
-├── content/blog/        # Markdown blog posts
-├── hooks/               # Custom React hooks
-├── utils/               # Utility functions
-├── styles/              # Global styles
-└── App.jsx              # Main app with routing
+│   ├── sections/             # home page sections
+│   ├── common/               # Button, Section, Navbar, Footer, Dialog, Logo, …
+│   ├── contact/              # project request form
+│   ├── three/                # 3D scenes (lazy-loaded)
+│   └── blog/                 # blog list, cards, article
+├── content/blog/*.md         # blog posts
+├── pages/                    # Home, Blog, BlogPostPage, NotFound
+└── utils/seo.js              # per-page meta tags
+public/                       # favicons, brand images, sitemap.xml, robots.txt
+deploy/aws-amplify/           # Amplify rewrite rules and custom headers
+scripts/package-amplify.mjs   # zips dist/ for Amplify
+design/brand-source/          # original logo artwork (not deployed)
 ```
 
-## 📝 Adding Blog Posts
+## Documentation
+- [Deployment guide (AWS Amplify)](docs/DEPLOYMENT.md)
+- [Content guide](docs/CONTENT_GUIDE.md) — editing text, case studies, contact details and blog posts
+- `CLAUDE.md` and `.claude/skills/` — project memory and guidelines for Claude Code
 
-Create a new markdown file in `src/content/blog/`:
+## Contact
+info@vinsolutions.lk · +94 70 373 4412 (call / WhatsApp) · Ragama, Sri Lanka
 
-```markdown
----
-title: "Your Blog Post Title"
-date: "2025-12-02"
-author: "Your Name"
-category: "Category"
-tags: ["tag1", "tag2"]
-excerpt: "Brief description"
-slug: "url-slug"
----
-
-# Your Content Here
-
-Write your blog post in markdown...
-```
-
-## 🚀 Deployment
-
-### Cloudflare Pages (Recommended)
-
-1. **Connect GitHub Repository**:
-   - Go to Cloudflare Pages dashboard
-   - Click "Create a project"
-   - Connect your GitHub account
-   - Select this repository
-
-2. **Configure Build Settings**:
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-   - Root directory: `/` (leave empty)
-
-3. **Add GitHub Secrets** (for automatic deployments):
-   - `CLOUDFLARE_API_TOKEN`: Your Cloudflare API token
-   - `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-
-4. **Deploy**: Push to `main` branch to trigger automatic deployment
-
-### Manual Deployment
-
-```bash
-# Build the project
-npm run build
-
-# Deploy using Wrangler
-npm run deploy
-```
-
-## 📖 Documentation
-
-- [Setup Guide](./docs/SETUP.md) - Local development setup
-- [Blog Guide](./docs/BLOG_GUIDE.md) - Adding and managing blog posts
-- [Deployment Guide](./docs/DEPLOYMENT.md) - Cloudflare Pages deployment
-- [Content Guide](./docs/CONTENT_GUIDE.md) - Content management
-
-## 🎨 Customization
-
-### Colors
-
-Edit `tailwind.config.js` to customize the color palette:
-
-```javascript
-colors: {
-  primary: {
-    900: '#001F3F',  // Deep Navy
-    700: '#0047AB',  // Ocean Blue
-    500: '#1E90FF',  // Sky Blue
-    100: '#E0F0FF',  // Light Blue
-  },
-  accent: '#FFB700',  // Gold
-}
-```
-
-### Company Information
-
-Update `src/utils/constants.js`:
-
-```javascript
-export const COMPANY_INFO = {
-  name: 'Your Company Name',
-  email: 'your@email.com',
-  phone: '+1 (555) 000-0000',
-};
-```
-
-## 🧪 Scripts
-
-```bash
-npm run dev         # Start development server
-npm run build       # Build for production
-npm run preview     # Preview production build
-npm run deploy      # Deploy to Cloudflare Pages
-npm run lint        # Run ESLint
-```
-
-## 📈 Performance
-
-- **Lighthouse Score**: 90+ on all metrics
-- **First Contentful Paint**: <1.5s
-- **Time to Interactive**: <3s
-- **Build Size**: ~200KB (gzipped)
-
-## 🔒 Security
-
-- HTTPS enforced via Cloudflare
-- Environment variables for sensitive data
-- Content Security Policy headers
-- Form validation and sanitization
-
-## 📄 License
-
-MIT License - see LICENSE file for details
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📞 Support
-
-For questions or issues:
-- Email: info@vinsolutions.lk
-- Website: cloud.vinsolutions.lk
-
-## 🙏 Acknowledgments
-
-- Built with [Vite](https://vitejs.dev/)
-- Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Animations by [Framer Motion](https://www.framer.com/motion/)
-- Icons from [Lucide](https://lucide.dev/)
-- Hosted on [Cloudflare Pages](https://pages.cloudflare.com/)
-
----
-
-Made with ❤️ by Vin Cloud Solutions
+© VIN Cloud Solutions. All rights reserved.

@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html, Line, OrbitControls } from '@react-three/drei';
-import { latLonToVec3, isCoarsePointer, prefersReducedMotion, createGlowMaterial } from './utils';
+import { latLonToVec3, isCoarsePointer, prefersReducedMotion, createGlowMaterial, useLabelsReady } from './utils';
 
 const RADIUS = 1.6;
 const HUB = { name: 'VIN Cloud · South Asia', lat: 15, lon: 78 };
@@ -71,6 +71,7 @@ const Arc = ({ from, to, index }) => {
 
 const Node = ({ position, label, hub = false, occluder }) => {
     const [hovered, setHovered] = useState(false);
+    const labelsReady = useLabelsReady();
     const ring = useRef();
     const normal = useMemo(() => position.clone().normalize(), [position]);
     const quaternion = useMemo(
@@ -98,7 +99,7 @@ const Node = ({ position, label, hub = false, occluder }) => {
                 <ringGeometry args={[0.05, 0.065, 32]} />
                 <meshBasicMaterial color={hub ? '#67E8F9' : '#7CC4DA'} transparent side={THREE.DoubleSide} depthWrite={false} />
             </mesh>
-            {(hovered || hub) && (
+            {labelsReady && (hovered || hub) && (
                 <Html center occlude={[occluder]} position={normal.clone().multiplyScalar(0.18)} zIndexRange={[20, 0]}>
                     <span className={`pointer-events-none whitespace-nowrap rounded-full border px-2.5 py-1 font-mono text-[11px] backdrop-blur ${hub ? 'border-glow/40 bg-ink-900/80 text-glow' : 'border-white/15 bg-ink-900/80 text-slate-200'}`}>
                         {label}

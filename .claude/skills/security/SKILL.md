@@ -1,16 +1,16 @@
 ---
 name: security
-description: Security rules for the VIN Cloud static React site — what may and may not ship to the browser, env vars, Formspree spam protection, external links, HTML injection, dependencies and recommended Cloudflare headers. Apply to every code change; load it explicitly when touching forms, env vars, third-party scripts, links or headers.
+description: Security rules for the VIN Cloud static React site — what may and may not ship to the browser, env vars, Formspree spam protection, external links, HTML injection, dependencies and recommended response headers. Apply to every code change; load it explicitly when touching forms, env vars, third-party scripts, links or headers.
 ---
 
-# Security (static SPA on Cloudflare)
+# Security (static SPA on AWS)
 
 There is no backend: everything in `dist/` is public. Threats are leaked secrets, XSS via content, spam, supply chain and privacy.
 
 ## Rules
 1. **No secrets in the client.** Any `VITE_*` value is embedded in the bundle. Only public identifiers belong there
    (the Formspree form ID is public by design). API keys (Gemini, cloud credentials…) must never be added to this repo or `.env*` that gets built.
-2. Real env values go in `.env.local` (git-ignored) or CI secrets; `.env.example` holds placeholders/public values only.
+2. Real env values go in `.env.local` (git-ignored) on the machine that runs the build; `.env.example` holds placeholders/public values only.
 3. **No raw HTML injection.** `dangerouslySetInnerHTML` is allowed only for JSON-LD built from our own constants (`FAQ.jsx`). Blog markdown
    renders through `react-markdown` without `rehype-raw` — keep it that way.
 4. External links: `target="_blank"` always with `rel="noopener noreferrer"` (WhatsApp, Facebook, Maps, socials).
@@ -21,7 +21,8 @@ There is no backend: everything in `dist/` is public. Threats are leaked secrets
 8. Dependencies: run `npm audit --omit=dev` when adding/upgrading; prefer well-maintained packages (see `researcher`). Don't use `--force`/`--legacy-peer-deps` to silence real incompatibilities.
 9. Content safety: no client names, no prices (business confidentiality — see `site-content`).
 
-## Recommended headers (owner applies via Cloudflare / `public/_headers` on Pages)
+## Response headers — source of truth: `deploy/aws-amplify/custom-headers.yml` (pasted into Amplify → Custom headers)
+Current policy (keep this copy in sync with the file):
 ```
 /*
   X-Content-Type-Options: nosniff
@@ -31,7 +32,8 @@ There is no backend: everything in `dist/` is public. Threats are leaked secrets
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'
 ```
 Notes: inline JSON-LD `<script type="application/ld+json">` is data, not executed, but strict CSPs may still flag it — test after enabling.
-three.js shaders need no `unsafe-eval`. Verify the site (3D scenes + form submit) in the browser after any CSP change.
+three.js shaders need no `unsafe-eval`. Verified locally with 0 violations (3D, blog deep links, form). Any new third-party domain
+(analytics, fonts, embeds) must be added to the CSP, then re-verify (see `deploy` → Verifying headers/CSP locally).
 
 ## Quick check before finishing
 □ no new secrets/keys · □ new external links have rel noopener · □ no new innerHTML · □ form still has honeypot + consent · □ `npm audit` clean for new deps

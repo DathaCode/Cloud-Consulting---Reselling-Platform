@@ -13,7 +13,7 @@ description: Debugging loop and project memory upkeep for the VIN Cloud site —
 5. **Record it** (below) if it was non-obvious.
 
 Escalate: 2 failed attempts at the same idea → change approach; 3 approaches failed → stop and explain to the owner.
-Outside our control (Formspree/Cloudflare down, permissions) → tell the owner immediately.
+Outside our control (Formspree/AWS down, permissions) → tell the owner immediately.
 
 ## Memory: where knowledge goes
 | Kind | Write it to |
@@ -31,7 +31,7 @@ Never store secrets, tokens or visitor data.
 |---|---|---|
 | `npm install` ERESOLVE mentioning React 19 | package peer range excludes React 19 | find a compatible version / remove the package; no `--force` |
 | 3D canvas blank in screenshot | screenshot taken mid-scroll or before lazy chunk loaded | use `shot.mjs` with selector + wait; then check `[pageerror]` |
-| One drei `<Html>` label missing | mounted in first canvas commit | defer labels with a ready flag |
+| One drei `<Html>` label missing (intermittent) | mounted in first canvas commit | gate with `useLabelsReady()` |
 | Labels enormous | `distanceFactor` on `<Html>` | remove it; size with CSS |
 | Page won't scroll over 3D on phones | OrbitControls on touch device | gate with `isCoarsePointer()` |
 | three.js preloaded on first load | `manualChunks` forcing three | remove manualChunks |
@@ -39,6 +39,9 @@ Never store secrets, tokens or visitor data.
 | `vite build` → `emptyDir` error (Windows) | a shell cwd inside `dist/` | cd to repo root, rebuild |
 | bash heredoc "unexpected EOF" | curly quotes in heredoc | write script file in scratchpad, run it |
 | Form test shows CORS error | Puppeteer mock didn't answer preflight | return CORS headers for OPTIONS + POST |
+| Amplify: refresh on `/blog` → 404 | SPA rewrite missing | paste `deploy/aws-amplify/rewrites.json` |
+| Amplify: blank page, JS served as text/html | rewrite regex catches .js | restore the rule from `rewrites.json` |
+| "Refused to load…" in console | CSP lacks a new domain | update `custom-headers.yml`, re-verify |
 
 ## Before saying "done"
 Build passes · visual check done · CLAUDE.md lessons updated if anything surprising happened · nothing committed.

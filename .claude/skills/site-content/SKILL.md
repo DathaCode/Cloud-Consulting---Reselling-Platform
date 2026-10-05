@@ -44,7 +44,9 @@ and `.env.example`. Domain changes: see the `seo` skill (sitemap, robots, OG ima
 2. Import it in `src/hooks/useBlogData.js` (`?raw`) and add to `rawPosts`.
 3. Add `<url>` to `public/sitemap.xml` with `lastmod`.
 4. New category? Add a tint in `BlogCover.jsx` `TINTS` (optional).
-5. Build and open `/blog/<slug>` to check rendering.
+5. Build and open `/blog/<slug>` to check rendering. No tables/strikethrough (no remark-gfm).
+
+Human-facing version of these instructions: `docs/CONTENT_GUIDE.md` — keep both in sync.
 
 ## After editing
 `npm run build`; screenshot the changed section (`ui-verification`). Grep for leaked client names or prices:

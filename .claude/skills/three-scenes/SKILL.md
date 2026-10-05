@@ -33,7 +33,7 @@ const NeuralScene = lazy(() => import('../three/NeuralScene'));
 - Textures: only from `/brand/` (e.g. `useTexture('/brand/vin-mark.png')`); the mark needs a light disc behind it.
 
 ## Known gotchas (verified in this project)
-1. drei `<Html>` rendered in the canvas's first commit may never appear → gate labels behind `useEffect(() => setReady(true), [])`.
+1. drei `<Html>` rendered in the canvas's first commit may (intermittently) never appear → gate every label with `useLabelsReady()` from `utils.js`.
 2. `instancedMesh.setColorAt` must run before the first render (in `useLayoutEffect`), or the material compiles without instance colors.
 3. Additive fresnel glow at intensity > 1 / scale > 1.5 blows out (huge halos) — keep ≈ 0.9 / 1.45.
 4. `THREE.Clock` deprecation warnings in the console come from R3F internals — harmless.
