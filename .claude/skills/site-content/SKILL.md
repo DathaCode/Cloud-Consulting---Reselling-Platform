@@ -15,7 +15,9 @@ Almost all copy lives in **`src/utils/constants.js`**. Components only render it
    The other four (knowledge copilot, data migration, AWS platform, Azure + OCI) use owner-approved representative figures — keep them plausible.
 4. Region wording: based in **Ragama, Sri Lanka**, serving **South Asia & beyond**.
 5. Tone: confident, concrete, outcome-focused; British/Commonwealth readers but US spelling is already used — stay consistent (US spelling).
-6. Contact facts come from `COMPANY_INFO` — never hard-code phone/email in components.
+6. **No em dashes (—)** in any site copy, attributes or meta tags; rewrite with commas, colons, periods or parentheses.
+   Check: `grep -rn "—" src index.html public` must return nothing.
+7. Contact facts come from `COMPANY_INFO` — never hard-code phone/email in components.
 
 ## Map of constants.js
 | Export | Drives |

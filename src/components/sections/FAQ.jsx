@@ -67,7 +67,7 @@ const FAQ = () => (
                         eyebrow="FAQ"
                         title="Questions,"
                         highlight="answered."
-                        description="Can’t find what you need? Ask us directly — we reply within one business day."
+                        description="Can’t find what you need? Ask us directly. We reply within one business day."
                     />
                 </div>
                 <Reveal className="flex flex-col gap-3 lg:col-span-8">

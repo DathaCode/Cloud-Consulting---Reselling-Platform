@@ -132,7 +132,7 @@ const CaseStudies = () => {
                     eyebrow="Our work"
                     title="Real solutions,"
                     highlight="measurable outcomes."
-                    description="From AI products we’ve built in-house to cloud platforms we run every day — a look at what we deliver."
+                    description="From AI products we’ve built in-house to cloud platforms we run every day: a look at what we deliver."
                 />
 
                 <Reveal className="mt-10 flex justify-center">

@@ -1,0 +1,22 @@
+# AWS Amplify Hosting build settings (Git-connected app, frontend only — no Amplify backend).
+# Amplify runs this on every build of the connected branch. See docs/DEPLOYMENT.md.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm install 20
+        - nvm use 20
+        - node -v
+        # Reuse the npm download cache between builds; npm ci also fails fast if package-lock.json is out of sync.
+        - npm ci --cache .npm --prefer-offline
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .npm/**/*

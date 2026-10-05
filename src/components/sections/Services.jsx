@@ -27,7 +27,7 @@ const AIPreview = () => (
         </p>
         <p className="mt-2 text-slate-400">
             <span className="text-violet-300">ai ›</span> 3 P1s open (Jira · ServiceNow). Root cause identified for 2; ETA 4h.
-            Draft posted to <span className="text-slate-200">#exec-updates</span> in Teams — sources cited.
+            Draft posted to <span className="text-slate-200">#exec-updates</span> in Teams, with sources cited.
             <span className="ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 bg-glow animate-pulse-soft" />
         </p>
     </div>
@@ -94,7 +94,7 @@ const Services = () => (
                 eyebrow="What we do"
                 title="End-to-end technology services,"
                 highlight="one accountable partner."
-                description="Strategic thinking combined with hands-on engineering — from AI and custom software to cloud infrastructure, integrations and licensing."
+                description="Strategic thinking combined with hands-on engineering, from AI and custom software to cloud infrastructure, integrations and licensing."
             />
             <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {SERVICES.map((service, index) => (

@@ -10,7 +10,7 @@ There is no backend: everything in `dist/` is public. Threats are leaked secrets
 ## Rules
 1. **No secrets in the client.** Any `VITE_*` value is embedded in the bundle. Only public identifiers belong there
    (the Formspree form ID is public by design). API keys (Gemini, cloud credentials…) must never be added to this repo or `.env*` that gets built.
-2. Real env values go in `.env.local` (git-ignored) on the machine that runs the build; `.env.example` holds placeholders/public values only.
+2. Real env values go in `.env.local` (git-ignored) locally, or Amplify → Environment variables for production builds; `.env.example` holds placeholders/public values only.
 3. **No raw HTML injection.** `dangerouslySetInnerHTML` is allowed only for JSON-LD built from our own constants (`FAQ.jsx`). Blog markdown
    renders through `react-markdown` without `rehype-raw` — keep it that way.
 4. External links: `target="_blank"` always with `rel="noopener noreferrer"` (WhatsApp, Facebook, Maps, socials).
@@ -21,7 +21,7 @@ There is no backend: everything in `dist/` is public. Threats are leaked secrets
 8. Dependencies: run `npm audit --omit=dev` when adding/upgrading; prefer well-maintained packages (see `researcher`). Don't use `--force`/`--legacy-peer-deps` to silence real incompatibilities.
 9. Content safety: no client names, no prices (business confidentiality — see `site-content`).
 
-## Response headers — source of truth: `deploy/aws-amplify/custom-headers.yml` (pasted into Amplify → Custom headers)
+## Response headers — source of truth: `customHttp.yml` in the repo root (applied by Amplify on every build)
 Current policy (keep this copy in sync with the file):
 ```
 /*

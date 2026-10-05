@@ -5,7 +5,7 @@ export const COMPANY_INFO = {
     shortName: 'VIN Cloud',
     tagline: "Reimagine what's possible through technology",
     summary:
-        "VIN Cloud Solutions stands at the forefront of South Asia's digital transformation landscape, helping organizations reimagine what's possible through technology. By combining strategic thinking with hands-on technical expertise, we empower businesses to modernize, scale, and thrive in an increasingly digital world — one solution at a time.",
+        "VIN Cloud Solutions stands at the forefront of South Asia's digital transformation landscape, helping organizations reimagine what's possible through technology. By combining strategic thinking with hands-on technical expertise, we empower businesses to modernize, scale, and thrive in an increasingly digital world, one solution at a time.",
     email: 'info@vinsolutions.lk',
     phone: '+94 70 373 4412',
     whatsapp: '94703734412', // international format, digits only (wa.me links)
@@ -49,7 +49,7 @@ export const SERVICES = [
         title: 'AI-Powered Innovation & Implementation',
         short: 'AI Implementation',
         description:
-            'From strategy to production: generative AI copilots, RAG knowledge assistants, intelligent automation and AI agents — built securely on your data and your cloud.',
+            'From strategy to production: generative AI copilots, RAG knowledge assistants, intelligent automation and AI agents, built securely on your data and your cloud.',
         features: ['GenAI copilots & chat assistants', 'RAG over enterprise knowledge', 'AI agents & workflow automation', 'ML, forecasting & vision', 'Responsible AI & governance'],
         tags: ['Azure OpenAI', 'Bedrock', 'Vertex AI', 'Copilot', 'Rovo'],
         featured: true,
@@ -60,7 +60,7 @@ export const SERVICES = [
         title: 'Web & Mobile Software Development',
         short: 'Web & Mobile',
         description:
-            'Modern, fast and accessible products — customer portals, SaaS platforms, internal tools and cross-platform mobile apps engineered for scale.',
+            'Modern, fast and accessible products: customer portals, SaaS platforms, internal tools and cross-platform mobile apps engineered for scale.',
         features: ['React / Next.js web apps', 'iOS & Android (React Native / Flutter)', 'APIs & microservices', 'UI/UX & design systems', 'QA, CI/CD & DevOps'],
         tags: ['React', 'Node.js', '.NET', 'Flutter'],
     },
@@ -70,7 +70,7 @@ export const SERVICES = [
         title: 'Cloud Infrastructure Consultation',
         short: 'Cloud Consulting',
         description:
-            'Architecture, migration and optimization across AWS, Azure, Google Cloud and Oracle — secure landing zones, cost control and resilient operations.',
+            'Architecture, migration and optimization across AWS, Azure, Google Cloud and Oracle, with secure landing zones, cost control and resilient operations.',
         features: ['Cloud strategy & readiness', 'Data & workload migration', 'Landing zones & IaC', 'Managed infrastructure & 24/7 maintenance', 'FinOps cost optimization'],
         tags: ['AWS', 'Azure', 'GCP', 'OCI'],
     },
@@ -90,7 +90,7 @@ export const SERVICES = [
         title: 'Integrations & Automation',
         short: 'Integrations',
         description:
-            'Connect anything: SSO, ERPs, CRMs, collaboration suites and custom systems — via APIs, events and low-code automation.',
+            'Connect anything: SSO, ERPs, CRMs, collaboration suites and custom systems via APIs, events and low-code automation.',
         features: ['API & middleware development', 'Identity & SSO', 'ERP / CRM integrations', 'Power Automate, Apps Script, Forge'],
         tags: ['REST', 'GraphQL', 'Webhooks', 'iPaaS'],
     },
@@ -100,7 +100,7 @@ export const SERVICES = [
         title: 'Cloud Products & Licensing',
         short: 'Licensing',
         description:
-            'Procure, license and administer Microsoft 365, Google Workspace, Atlassian and cloud subscriptions — with right-sizing and dedicated account management.',
+            'Procure, license and administer Microsoft 365, Google Workspace, Atlassian and cloud subscriptions, with right-sizing and dedicated account management.',
         features: ['Licensing & subscription advisory', 'Tenant setup & administration', 'License optimization', 'Multi-vendor procurement'],
         tags: ['M365', 'Workspace', 'Atlassian'],
     },
@@ -112,7 +112,7 @@ export const AI_CAPABILITIES = [
         outcome: 'Conversations',
         icon: 'Bot',
         title: 'GenAI Copilots & Assistants',
-        description: 'Branded chat assistants for customers and employees, grounded in your documents, tickets and data — with guardrails and audit trails.',
+        description: 'Branded chat assistants for customers and employees, grounded in your documents, tickets and data, with guardrails and audit trails.',
         stack: ['Azure OpenAI', 'Amazon Bedrock', 'Gemini', 'Claude'],
     },
     {
@@ -128,7 +128,7 @@ export const AI_CAPABILITIES = [
         outcome: 'Autonomous actions',
         icon: 'Workflow',
         title: 'AI Agents & Automation',
-        description: 'Agents that read, decide and act across your tools — triaging Jira tickets, drafting proposals, reconciling records and more.',
+        description: 'Agents that read, decide and act across your tools: triaging Jira tickets, drafting proposals, reconciling records and more.',
         stack: ['MCP', 'Power Automate', 'Atlassian Rovo', 'Function calling'],
     },
     {
@@ -144,7 +144,7 @@ export const AI_CAPABILITIES = [
         outcome: 'Forecasts',
         icon: 'LineChart',
         title: 'Predictive Analytics & ML',
-        description: 'Forecasting, anomaly detection, churn and demand models — productionized with MLOps on your cloud of choice.',
+        description: 'Forecasting, anomaly detection, churn and demand models, productionized with MLOps on your cloud of choice.',
         stack: ['SageMaker', 'Azure ML', 'Vertex AI', 'BigQuery ML'],
     },
     {
@@ -164,7 +164,7 @@ export const PLATFORMS = [
         name: 'AWS',
         full: 'Amazon Web Services',
         color: '#FF9900',
-        summary: 'Well-architected AWS environments — from landing zones and migrations to serverless apps and generative AI on Bedrock.',
+        summary: 'Well-architected AWS environments, from landing zones and migrations to serverless apps and generative AI on Bedrock.',
         infra: ['Control Tower landing zones', 'EC2, EKS & serverless', 'VPC, networking & hybrid'],
         services: ['Migration & modernization', 'Cost optimization (FinOps)', 'Security Hub & compliance'],
         products: ['Amazon Bedrock & SageMaker', 'RDS, Aurora & DynamoDB', 'Amazon Connect'],
@@ -194,7 +194,7 @@ export const PLATFORMS = [
         name: 'Microsoft 365',
         full: 'Microsoft 365 for Business & Enterprise',
         color: '#E8613C',
-        summary: 'Secure, well-governed Microsoft 365 tenants — from email migration to Teams, SharePoint intranets and Copilot.',
+        summary: 'Secure, well-governed Microsoft 365 tenants, from email migration to Teams, SharePoint intranets and Copilot.',
         infra: ['Tenant setup & Entra ID', 'Intune device management', 'Exchange Online migration'],
         services: ['Teams & SharePoint intranets', 'Purview data governance', 'Power Platform solutions'],
         products: ['Microsoft 365 Copilot', 'Copilot Studio agents', 'Business Premium & E3/E5 licensing'],
@@ -214,7 +214,7 @@ export const PLATFORMS = [
         name: 'Atlassian',
         full: 'Atlassian Cloud',
         color: '#4C8DFF',
-        summary: 'Jira, Confluence and Jira Service Management configured for how your teams actually work — plus Server/DC to Cloud migration.',
+        summary: 'Jira, Confluence and Jira Service Management configured for how your teams actually work, plus Server/DC to Cloud migration.',
         infra: ['Server / Data Center → Cloud migration', 'Atlassian Access & SSO', 'Bitbucket Pipelines CI/CD'],
         services: ['Workflow & schema design', 'ITSM with Jira Service Management', 'Admin, training & support'],
         products: ['Jira & Confluence Cloud', 'Atlassian Rovo (AI)', 'Forge apps & marketplace add-ons'],
@@ -225,7 +225,7 @@ export const INTEGRATIONS = [
     {
         icon: 'KeyRound',
         title: 'Identity & Single Sign-On',
-        description: 'One login everywhere with Microsoft Entra ID, Google Identity, Okta, SAML and OIDC — with automated provisioning.',
+        description: 'One login everywhere with Microsoft Entra ID, Google Identity, Okta, SAML and OIDC, with automated provisioning.',
         examples: ['Entra ID', 'Google SSO', 'Okta', 'SCIM'],
     },
     {
@@ -237,7 +237,7 @@ export const INTEGRATIONS = [
     {
         icon: 'MessagesSquare',
         title: 'Collaboration Suites',
-        description: 'Bridge Microsoft 365, Google Workspace, Slack and Atlassian — tickets, documents and notifications flowing where people work.',
+        description: 'Bridge Microsoft 365, Google Workspace, Slack and Atlassian, so tickets, documents and notifications flow where people work.',
         examples: ['Teams', 'Slack', 'Jira', 'Google Chat'],
     },
     {
@@ -265,14 +265,14 @@ export const PROCESS_STEPS = [
     { step: '02', title: 'Design', description: 'Solution architecture, UX and a phased roadmap with clear success metrics.', icon: 'PenTool' },
     { step: '03', title: 'Build', description: 'Agile delivery in short sprints with demos, automated tests and CI/CD.', icon: 'Hammer' },
     { step: '04', title: 'Launch', description: 'Secure deployment, data migration, training and change management.', icon: 'Rocket' },
-    { step: '05', title: 'Evolve', description: 'Monitoring, optimization and continuous improvement — including AI.', icon: 'RefreshCw' },
+    { step: '05', title: 'Evolve', description: 'Monitoring, optimization and continuous improvement, including AI.', icon: 'RefreshCw' },
 ];
 
 export const WHY_CHOOSE_US = [
     {
         icon: 'Layers',
         title: 'Multi-cloud, vendor-neutral',
-        description: 'We work across AWS, Azure, Google, Oracle, Microsoft 365 and Atlassian, so recommendations fit your needs — not a single vendor’s.',
+        description: 'We work across AWS, Azure, Google, Oracle, Microsoft 365 and Atlassian, so recommendations fit your needs, not a single vendor’s.',
     },
     {
         icon: 'ShieldCheck',
@@ -287,7 +287,7 @@ export const WHY_CHOOSE_US = [
     {
         icon: 'Handshake',
         title: 'Strategy + hands-on delivery',
-        description: 'The same team that designs your solution builds, launches and supports it — no hand-off gaps.',
+        description: 'The same team that designs your solution builds, launches and supports it, with no hand-off gaps.',
     },
 ];
 
@@ -308,13 +308,13 @@ export const CASE_STUDIES = [
         title: 'Sinhala AI Proofreader',
         sector: 'Media & Publishing',
         summary:
-            'A Windows desktop app that proofreads Sinhala text — spelling, grammar and Unicode/encoding errors — using Google Gemini, and gets smarter with every human correction.',
+            'A Windows desktop app that proofreads Sinhala text (spelling, grammar and Unicode/encoding errors) using Google Gemini, and gets smarter with every human correction.',
         challenge:
             'Generic spell-checkers don’t understand Sinhala grammar, colloquial or inflected forms, or legacy encoding errors. Office PCs often run offline, and giving every machine its own API key isn’t secure.',
         solution:
             'A single self-contained .exe with a modern dark/light UI and English ↔ Sinhala switching. A conservative Sinhala-linguistics prompt flags errors only at ≥ 0.75 confidence and returns corrected text, a typed error list and bilingual explanations. In LAN mode, up to ~20 offline client PCs route requests through one internet-connected Control PC that holds the key.',
         highlights: [
-            'Self-learning SQLite corrections database — verified fixes are injected as few-shot examples',
+            'Self-learning SQLite corrections database: verified fixes are injected as few-shot examples',
             'Confirmed corrections are applied instantly on-device, with no API call',
             'Ignores English words, Sri Lankan proper nouns, numbers, dates and valid colloquial forms',
             'Bilingual (Sinhala + English) explanations and summary for every check',
@@ -330,19 +330,19 @@ export const CASE_STUDIES = [
         id: 'graphic-cast',
         category: 'ai-solution',
         featured: true,
-        title: 'Graphic-Cast — Broadcast Graphics',
+        title: 'Graphic-Cast: Broadcast Graphics',
         sector: 'Broadcast Media',
         summary:
-            'Operators type Sinhala Unicode and get broadcast-ready graphics that drop straight into playout — no design tool, no hand-kerning, no waiting for the graphics desk.',
+            'Operators type Sinhala Unicode and get broadcast-ready graphics that drop straight into playout. No design tool, no hand-kerning, no waiting for the graphics desk.',
         challenge:
             'Every quote and headline depended on a graphics desk. The required display font has zero Sinhala Unicode coverage, and new graphics had to match years of hand-made originals exactly.',
         solution:
             'A web platform with two live tools: Quote Text renders a 1920×1080 transparent PNG lower-third, and Headline renders a 14.16 s Apple ProRes 4444 .mov with alpha. Text stays Unicode and is converted to legacy FM bytes only at render time; the on-screen preview is the real renderer’s output, so preview and export can never drift.',
         highlights: [
-            'Gemini-assisted keyword highlighting — the operator’s manual choice always wins',
+            'Gemini-assisted keyword highlighting; the operator’s manual choice always wins',
             'Gemini failure never blocks the operator; the API key never reaches the browser',
             'Calibrated against existing hand-made graphics (≈84.5% horizontal condense)',
-            'Shared auth, storage and admin console — tool #3 is a new route, not a new app',
+            'Shared auth, storage and admin console, so tool #3 is a new route, not a new app',
         ],
         results: [
             { value: '2', label: 'broadcast tools live in playout' },
@@ -359,7 +359,7 @@ export const CASE_STUDIES = [
         summary: 'A Microsoft Teams copilot that answers staff questions from SharePoint and Confluence with cited sources, and triages incoming Jira requests.',
         challenge: 'Staff spent hours searching scattered policies, proposals and project docs, and the service desk was flooded with repeat L1 questions.',
         solution: 'Retrieval-augmented generation with Azure OpenAI and Azure AI Search over SharePoint and Confluence, permission-aware and delivered in Teams, plus an AI agent that classifies and routes Jira tickets.',
-        highlights: ['Permission-aware retrieval — users only see what they can access', 'Every answer cites its source documents', 'Ticket triage agent with human-in-the-loop approval'],
+        highlights: ['Permission-aware retrieval: users only see what they can access', 'Every answer cites its source documents', 'Ticket triage agent with human-in-the-loop approval'],
         results: [
             { value: '65%', label: 'faster answers to internal queries' },
             { value: '40%', label: 'fewer L1 service-desk tickets' },
@@ -390,8 +390,8 @@ export const CASE_STUDIES = [
         sector: 'Retail & E-commerce',
         summary: 'Rebuilt a fragile AWS setup as a secure, automated landing zone, then took over day-to-day operations and cost management.',
         challenge: 'Hand-built servers, rising monthly bills and slow, risky releases during peak sales seasons.',
-        solution: 'Control Tower landing zone, Terraform-managed EKS with autoscaling, CI/CD pipelines, and Savings Plans plus rightsizing — followed by 24/7 monitoring and maintenance.',
-        highlights: ['Everything as code — environments rebuilt in minutes', 'Autoscaling for seasonal peaks', 'Monthly FinOps reviews and reports'],
+        solution: 'Control Tower landing zone, Terraform-managed EKS with autoscaling, CI/CD pipelines, and Savings Plans plus rightsizing, followed by 24/7 monitoring and maintenance.',
+        highlights: ['Everything as code: environments rebuilt in minutes', 'Autoscaling for seasonal peaks', 'Monthly FinOps reviews and reports'],
         results: [
             { value: '32%', label: 'lower monthly AWS costs' },
             { value: '60%', label: 'faster deployments' },
@@ -436,7 +436,7 @@ export const FAQ_ITEMS = [
     },
     {
         question: 'Can you migrate our data and maintain our cloud infrastructure?',
-        answer: 'Yes. We migrate databases, files, email and ERP data with automated reconciliation and rehearsed cutovers, then build and maintain infrastructure on AWS, Azure and Oracle Cloud under a managed-service SLA — monitoring, patching, backups and cost optimization included.',
+        answer: 'Yes. We migrate databases, files, email and ERP data with automated reconciliation and rehearsed cutovers, then build and maintain infrastructure on AWS, Azure and Oracle Cloud under a managed-service SLA, with monitoring, patching, backups and cost optimization included.',
     },
     {
         question: 'How long does a cloud migration typically take?',
@@ -448,7 +448,7 @@ export const FAQ_ITEMS = [
     },
     {
         question: 'How is pricing determined?',
-        answer: 'Every engagement is different, so we don’t publish fixed prices. After a free requirement analysis we share a clear proposal with scope, timeline and cost — with no obligation.',
+        answer: 'Every engagement is different, so we don’t publish fixed prices. After a free requirement analysis we share a clear proposal with scope, timeline and cost, with no obligation.',
     },
     {
         question: 'Do you provide post-launch support?',

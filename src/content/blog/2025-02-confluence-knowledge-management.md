@@ -11,7 +11,7 @@ slug: "confluence-knowledge-management"
 
 # Confluence Best Practices: Knowledge Management at Scale
 
-Confluence can be a powerful knowledge management platform—or a disorganized dumping ground. The difference lies in how you structure, govern, and adopt it across your organization.
+Confluence can be a powerful knowledge management platform or a disorganized dumping ground. The difference lies in how you structure, govern, and adopt it across your organization.
 
 ## 1. Space Architecture Strategy
 

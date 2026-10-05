@@ -76,7 +76,7 @@ const Navbar = () => {
         >
             <Container>
                 <nav aria-label="Main" className="flex h-16 items-center justify-between md:h-20">
-                    <a href="/" aria-label="VIN Cloud Solutions — home">
+                    <a href="/" aria-label="VIN Cloud Solutions home">
                         <Logo />
                     </a>
 

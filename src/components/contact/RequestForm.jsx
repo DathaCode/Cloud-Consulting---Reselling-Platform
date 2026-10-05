@@ -101,7 +101,7 @@ const StepHeading = ({ title, text }) => (
 
 const NeedsStep = ({ data, toggle, errors }) => (
     <>
-        <StepHeading title="What can we help you with?" text="Choose everything that applies — you can refine it later." />
+        <StepHeading title="What can we help you with?" text="Choose everything that applies. You can refine it later." />
         <div role="group" aria-label="Services" aria-describedby="services-error" className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
             {SERVICE_OPTIONS.map((o) => {
                 const selected = data.services.includes(o.id);
@@ -273,7 +273,7 @@ const ContactStep = ({ data, set, errors }) => {
 const ReviewRow = ({ label, value, onEdit }) => (
     <div className="flex items-start justify-between gap-4 border-b border-white/5 py-3.5 last:border-0">
         <dt className="w-32 shrink-0 font-mono text-[11px] uppercase tracking-[0.15em] text-slate-500">{label}</dt>
-        <dd className="flex-1 whitespace-pre-line break-words text-sm text-slate-200">{value || <span className="text-slate-500">—</span>}</dd>
+        <dd className="flex-1 whitespace-pre-line break-words text-sm text-slate-200">{value || <span className="text-slate-500">Not provided</span>}</dd>
         <button type="button" onClick={onEdit} className="shrink-0 rounded-lg p-1.5 text-slate-500 hover:bg-white/5 hover:text-brand-200" aria-label={`Edit ${label}`}>
             <Pencil size={14} />
         </button>
@@ -311,7 +311,7 @@ const SuccessView = ({ reference, name, onReset }) => (
             {[
                 ['Within 24 hours', 'A senior consultant reviews your request and contacts you.'],
                 ['Discovery call', 'A free 30-minute session to understand goals and constraints.'],
-                ['Proposal', 'After the requirement analysis: a clear scope, timeline and quotation — no obligation.'],
+                ['Proposal', 'After the requirement analysis: a clear scope, timeline and quotation, with no obligation.'],
             ].map(([title, text], i) => (
                 <li key={title} className="flex gap-4">
                     <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-brand-300/30 bg-brand-500/10 font-mono text-xs text-brand-200">{i + 1}</span>
@@ -416,7 +416,7 @@ const RequestForm = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
                 body: JSON.stringify({
-                    _subject: `New project request ${ref} — ${services} (${data.name})`,
+                    _subject: `New project request ${ref}: ${services} (${data.name})`,
                     reference: ref,
                     name: data.name,
                     email: data.email,
@@ -528,7 +528,7 @@ const RequestForm = () => {
 
                         {status === 'error' && (
                             <div role="alert" className="mt-6 rounded-xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-sm text-rose-200">
-                                We couldn’t send your request — your answers are saved. Please try again, or reach us on{' '}
+                                We couldn’t send your request, but your answers are saved. Please try again, or reach us on{' '}
                                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="font-semibold underline">WhatsApp</a> or at{' '}
                                 <a href={`mailto:${COMPANY_INFO.email}`} className="font-semibold underline">{COMPANY_INFO.email}</a>.
                             </div>

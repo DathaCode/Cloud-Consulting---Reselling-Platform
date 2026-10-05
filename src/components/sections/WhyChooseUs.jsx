@@ -16,7 +16,7 @@ const WhyChooseUs = () => (
                         id="about-title"
                         align="left"
                         eyebrow="Why VIN Cloud"
-                        title="Modernize, scale and thrive —"
+                        title="Modernize, scale and thrive,"
                         highlight="one solution at a time."
                     />
                     <Reveal delay={0.1}>

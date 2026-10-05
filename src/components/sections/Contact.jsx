@@ -32,7 +32,7 @@ const Contact = () => (
                         eyebrow="Start a project"
                         title="Ready to reimagine"
                         highlight="what’s possible?"
-                        description="Tell us what you need in about two minutes. A solution architect will get back to you within 24 hours — no obligation."
+                        description="Tell us what you need in about two minutes. A solution architect will get back to you within 24 hours, with no obligation."
                     />
 
                     <Reveal delay={0.1}>

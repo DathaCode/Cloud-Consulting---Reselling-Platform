@@ -38,7 +38,7 @@ const Footer = () => {
             <Container className="relative">
                 <div className="grid grid-cols-2 gap-10 py-16 md:grid-cols-12">
                     <div className="col-span-2 md:col-span-4">
-                        <a href="/" aria-label="VIN Cloud Solutions — home" className="inline-flex items-center gap-4">
+                        <a href="/" aria-label="VIN Cloud Solutions home" className="inline-flex items-center gap-4">
                             <span className="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-white to-brand-50 shadow-glow">
                                 <img src="/brand/vin-logo.png" alt="VIN Cloud Solutions logo" className="h-11 w-auto" width="575" height="627" loading="lazy" />
                             </span>
@@ -47,7 +47,7 @@ const Footer = () => {
                             </span>
                         </a>
                         <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
-                            Helping organizations across {COMPANY_INFO.region} modernize, scale and thrive with AI, software and cloud — one solution at a time.
+                            Helping organizations across {COMPANY_INFO.region} modernize, scale and thrive with AI, software and cloud, one solution at a time.
                         </p>
                         <div className="mt-6 flex gap-2">
                             {socials.map(({ href, label, icon }) => (

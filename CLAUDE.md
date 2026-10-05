@@ -7,8 +7,11 @@ Live domain: **https://cloud.vinsolutions.lk**. Single-page React app with a mar
 ## Working rules (from the owner)
 - **Never commit, push or create branches.** The owner commits everything. Leave changes in the working tree.
 - Ask before anything outward-facing (real form submissions, deploys, publishing).
-- **No CI/CD.** The owner deploys manually to **AWS Amplify Hosting** (zip upload, `npm run package:amplify`). Don't add GitHub workflows or `amplify.yml`.
+- **Hosting = AWS Amplify connected to GitHub** (`DathaCode/Cloud-Consulting---Reselling-Platform`, branch `main`). Amplify builds from
+  `amplify.yml`; there are **no GitHub Actions** — don't add workflows. Pushing to `main` may publish the site (if auto build is on),
+  so never push; the owner does.
 - **Never name clients** in case studies or copy (no "Hiru News" or any other client). Describe by sector only.
+- **No em dashes (—) anywhere in website copy** (src/, index.html, public/). Use commas, colons, periods or parentheses.
 - **Never publish prices or budgets.** Pricing is quoted in LKR after requirement analysis — say that, nothing more.
 - Case-study figures for the 4 non-featured engagements are representative values approved by the owner; the 2 featured
   AI products (Sinhala AI Proofreader, Graphic-Cast) are real in-house work.
@@ -24,7 +27,6 @@ No test runner is configured; `npm run build` + visual checks are the gate.
 npm run dev       # http://localhost:5173
 npm run build     # must pass before calling work done
 npm run preview   # serve dist/ on :4173 (use for screenshots)
-npm run package:amplify   # build + release/vin-cloud-site-<time>.zip for Amplify
 ```
 
 ## Where things live
@@ -39,8 +41,9 @@ npm run package:amplify   # build + release/vin-cloud-site-<time>.zip for Amplif
 | `src/content/blog/*.md` | Blog posts (must also be imported in `src/hooks/useBlogData.js` and added to `public/sitemap.xml`) |
 | `public/brand/` | Logo (`vin-logo.png`), mark (`vin-mark.png`), OG image, PWA icons |
 | `design/brand-source/` | Original logo artwork (not deployed) — source for regenerating icons/OG image |
-| `deploy/aws-amplify/` | `rewrites.json` (SPA rule) and `custom-headers.yml` (CSP, security, caching) pasted into the Amplify console |
-| `scripts/package-amplify.mjs` | Zips `dist/` (index.html at root, forward slashes) into `release/` |
+| `amplify.yml` | Amplify build spec (Node 20, `npm ci --cache .npm`, build, publish `dist/`) |
+| `customHttp.yml` | Response headers: CSP, HSTS, nosniff, frame DENY, caching — applied by Amplify on each build |
+| `deploy/aws-amplify/rewrites.json` | SPA rewrite rule, pasted once into the Amplify console |
 | `docs/` | Human docs: `DEPLOYMENT.md` (Amplify guide), `CONTENT_GUIDE.md` |
 
 ## Company facts (source of truth: `COMPANY_INFO` in constants.js)
@@ -56,7 +59,7 @@ Formspree endpoint `https://formspree.io/f/mppqanpv` (`VITE_FORMSPREE_ENDPOINT` 
 | `site-content` | Editing copy, services, case studies, FAQ, blog posts |
 | `seo` | Titles/meta, JSON-LD, sitemap, OG image, domain changes |
 | `contact-form` | The request form, Formspree, prefill links |
-| `deploy` | Build, packaging, manual AWS Amplify hosting, headers/CSP, domain, costs |
+| `deploy` | Build, AWS Amplify (GitHub) hosting, amplify.yml, headers/CSP, domain, costs |
 | `security` | Secrets, env vars, external links, form spam, headers |
 | `ui-verification` | Headless-Chrome screenshots and scripted form tests |
 | `researcher` | Before adding/upgrading dependencies or using unfamiliar APIs |
@@ -72,6 +75,6 @@ Formspree endpoint `https://formspree.io/f/mppqanpv` (`VITE_FORMSPREE_ENDPOINT` 
 - Very tall headless screenshots (> ~8000px) repeat content — screenshot per section instead.
 - Python heredocs in Git Bash break on curly quotes (’) — write the script to a file in the scratchpad and run it.
 - On Windows, a shell whose cwd is inside `dist/` makes `vite build` fail with `emptyDir` — cd out first.
-- Don't zip `dist/` with Windows PowerShell `Compress-Archive` for Amplify (older versions write backslash paths); use `npm run package:amplify`.
-- The Amplify CSP in `deploy/aws-amplify/custom-headers.yml` was verified locally (3D, blog deep links, form) — any new third-party domain must be added to it.
+- A clean-copy build (`npm ci --cache .npm --prefer-offline && npm run build`, as in `amplify.yml`) was verified 2026-10-05 — re-run it after dependency changes.
+- The CSP in `customHttp.yml` was verified locally (3D, blog deep links, form) — any new third-party domain must be added to it.
 - react-markdown runs without remark-gfm: blog tables/strikethrough don't render.

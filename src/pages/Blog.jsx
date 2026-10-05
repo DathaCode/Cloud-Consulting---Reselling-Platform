@@ -13,7 +13,7 @@ const Blog = () => {
     const [category, setCategory] = useState('All');
 
     useSeo({
-        title: 'Insights — Cloud, AI & Modernization Articles',
+        title: 'Insights: Cloud, AI & Modernization Articles',
         description: 'Expert articles on cloud migration, Atlassian, AWS, Oracle, Microsoft 365, AI and digital transformation from VIN Cloud Solutions.',
         path: '/blog',
     });

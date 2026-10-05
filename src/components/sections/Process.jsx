@@ -14,7 +14,7 @@ const Process = () => (
                 eyebrow="How we deliver"
                 title="A proven path from"
                 highlight="idea to impact."
-                description="Transparent, iterative and outcome-driven — so you see progress every sprint."
+                description="Transparent, iterative and outcome-driven, so you see progress every sprint."
             />
 
             <div className="relative mt-16">

@@ -1,5 +1,5 @@
-# Paste into: Amplify console → your app → Hosting → Custom headers → Edit.
-# (If the app is ever connected to Git instead, save this file as customHttp.yml in the repo root.)
+# AWS Amplify custom response headers — applied on every Git-connected build.
+# Changes take effect after the next build. Verify with: curl -I https://cloud.vinsolutions.lk
 customHeaders:
   - pattern: '**/*'
     headers:

@@ -41,7 +41,8 @@ Never store secrets, tokens or visitor data.
 | Form test shows CORS error | Puppeteer mock didn't answer preflight | return CORS headers for OPTIONS + POST |
 | Amplify: refresh on `/blog` → 404 | SPA rewrite missing | paste `deploy/aws-amplify/rewrites.json` |
 | Amplify: blank page, JS served as text/html | rewrite regex catches .js | restore the rule from `rewrites.json` |
-| "Refused to load…" in console | CSP lacks a new domain | update `custom-headers.yml`, re-verify |
+| "Refused to load…" in console | CSP lacks a new domain | update `customHttp.yml`, re-verify |
+| Amplify build fails at `npm ci` | lockfile out of sync with package.json | `npm install`, commit `package-lock.json` |
 
 ## Before saying "done"
 Build passes · visual check done · CLAUDE.md lessons updated if anything surprising happened · nothing committed.

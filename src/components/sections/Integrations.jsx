@@ -20,7 +20,7 @@ const Integrations = () => (
                             eyebrow="Integrations & development"
                             title="If it has an API,"
                             highlight="we can connect it."
-                            description="Any kind of development and integration — identity, business systems, collaboration suites and custom platforms working as one, with secure and observable data flows."
+                            description="Any kind of development and integration: identity, business systems, collaboration suites and custom platforms working as one, with secure and observable data flows."
                         />
                         <Reveal delay={0.15}>
                             <pre className="mt-8 overflow-x-auto rounded-2xl border border-white/10 bg-ink-950/80 p-5 font-mono text-xs leading-relaxed text-slate-400">

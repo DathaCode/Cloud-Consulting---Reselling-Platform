@@ -3,7 +3,7 @@
 Company website for **VIN Cloud Solutions** (Ragama, Sri Lanka): AI solutions & integrations, web and mobile development,
 cloud consulting (AWS, Azure, Google, Microsoft 365, Oracle, Atlassian), data migration and managed cloud.
 
-Live: **https://cloud.vinsolutions.lk** · Hosting: AWS Amplify (manual deploys)
+Live: **https://cloud.vinsolutions.lk** · Hosting: AWS Amplify, built from the `main` branch of this GitHub repo
 
 ## Features
 - Dark, techy single-page site with three interactive **3D explorers** (hero globe, AI neural network, cloud-platform orbit)
@@ -27,7 +27,6 @@ npm run dev            # http://localhost:5173
 | `npm run dev` | Development server with hot reload |
 | `npm run build` | Production build into `dist/` |
 | `npm run preview` | Serve the production build at http://localhost:4173 |
-| `npm run package:amplify` | Build + create `release/vin-cloud-site-<time>.zip` for AWS Amplify |
 
 Environment variables: see `.env.example` (only `VITE_FORMSPREE_ENDPOINT`, which already defaults to the live form).
 
@@ -45,8 +44,9 @@ src/
 ├── pages/                    # Home, Blog, BlogPostPage, NotFound
 └── utils/seo.js              # per-page meta tags
 public/                       # favicons, brand images, sitemap.xml, robots.txt
-deploy/aws-amplify/           # Amplify rewrite rules and custom headers
-scripts/package-amplify.mjs   # zips dist/ for Amplify
+amplify.yml                   # Amplify build settings (Node 20, npm ci, build → dist)
+customHttp.yml                # security headers + caching (applied by Amplify)
+deploy/aws-amplify/           # SPA rewrite rule for the Amplify console
 design/brand-source/          # original logo artwork (not deployed)
 ```
 
